@@ -1,6 +1,5 @@
 
 
-
 /*
 
 Given marks of a student, print on the screen:
@@ -35,6 +34,7 @@ Constraints
 
 */
 
+package LearnTheBasics;
 
 class Solution 
 {

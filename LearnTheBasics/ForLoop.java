@@ -1,4 +1,5 @@
 
+
 /* 
 
 Given two integers low and high, return the sum of all integers from low to high inclusive.
@@ -29,6 +30,8 @@ Constraints
 
 
 */
+
+package LearnTheBasics;
 
 class Solution 
 {
