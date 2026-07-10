@@ -25,7 +25,7 @@ Constraints
 
 
 
-package LearnTheBasics;
+package LearnTheBasics.Patterns;
 class Solution 
 {
     public void pattern1(int n) 

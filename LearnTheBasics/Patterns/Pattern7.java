@@ -1,36 +1,45 @@
 package LearnTheBasics.Patterns;
 
 
+/*
 
-/* 
 Given an integer n. You need to recreate the pattern given below for any value of N. Let's say for N = 5, the pattern should look like as below:
 
-*
-**
-***
-****
-*****
+    *
+   ***
+  *****
+ *******
+*********
+
 
 Constraints
-
 1 <= n <= 100
+
 
 */
 
 
 
-
 class Solution 
 {
-    public void pattern2(int n) 
+    public void pattern7(int n) 
     {
         for(int i=1;i<=n;i++)
         {
-            for(int j=1;j<=i;j++)
+            for(int s=1 ; s<=n-i ; s++)
             {
+                // for space
+                System.out.print(" ");  
+            }
+            for(int j=1 ; j<=(2*i)-1 ; j++)
+            {
+                // for stars
                 System.out.print("*");
             }
-            System.out.println();
+            System.out.println();  
         }
     }
 }
+
+    
+
