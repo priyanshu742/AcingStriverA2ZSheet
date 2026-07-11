@@ -2,14 +2,21 @@ package LearnTheBasics.Patterns;
 
 
 
-/* 
+/*
+
 Given an integer n. You need to recreate the pattern given below for any value of N. Let's say for N = 5, the pattern should look like as below:
+
 
 *
 **
 ***
 ****
 *****
+****
+***
+**
+*
+
 
 Print the pattern in the function given to you.
 
@@ -20,14 +27,21 @@ Constraints
 
 
 
-
 class Solution 
 {
-    public void pattern2(int n) 
+    public void pattern10(int n) 
     {
-        for(int i=1;i<=n;i++)
+        for(int i=1; i<=n ;i++)
         {
-            for(int j=1;j<=i;j++)
+            for(int j=1 ; j<=i ;j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for(int i=n-1 ; i>=1; i--)
+        {
+            for(int j=1; j<=i ; j++)
             {
                 System.out.print("*");
             }
