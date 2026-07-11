@@ -12,6 +12,8 @@ Given an integer n. You need to recreate the pattern given below for any value o
 12
 1
 
+Print the pattern in the function given to you.
+
 Constraints
 1 <= n <= 100
 
