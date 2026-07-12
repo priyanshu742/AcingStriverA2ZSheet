@@ -40,7 +40,7 @@ Constraints
 
 
 
-package LearnTheBasics;
+package LearnTheBasics.ThingsTOKnow;
 
 class Solution 
 {
