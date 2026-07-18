@@ -8,43 +8,26 @@
 
 public class Sol
 {
-    public static void main(String args[])
+    public static void main(String args[]) 
     {
-        for(int i = 1 ; i<=4 ; i++)
+        int count=0;
+        int index=0;
+        for(int i=1; i<=26 ; i++)
         {
-            for(int s=1 ; s<=i ; s++)
+            if(26%i==0)
             {
-                System.out.print("*");
+                count++;
             }
-            for(int b=2*(4-i) ; b>=1 ; b--)
-            {
-                System.out.print(" ");
-            }
-            for(int s=1 ; s<=i ; s++)
-            {
-                System.out.print("*");
-            }
-            System.out.println();
         }
-
-        // for lower part 
-
-        for(int i =3 ; i>=1 ; i--)
+        int arr[]=new int[count];
+        for(int i=1; i<=26 ; i++)
         {
-            for(int s=1 ; s<=i ; s++)
+            if(26%i==0)
             {
-                System.out.print("*");
+                arr[index]=i;
+                index++;
             }
-            for(int b=2*(4-i) ; b>=1 ; b--)
-            {
-                System.out.print(" ");
-            }
-            for(int s=1 ; s<=i ; s++)
-            {
-                System.out.print("*");
-            }
-            System.out.println();
         }
+        System.out.println(java.util.Arrays.toString(arr));
     }
 }
-        
