@@ -16,7 +16,7 @@ Print the pattern in the function given to you.
 Constraints
 1 <= n <= 100
 
-
+MEDIUM
 */
 
 
