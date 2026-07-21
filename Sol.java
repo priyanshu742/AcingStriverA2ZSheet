@@ -6,28 +6,39 @@
 
 
 
+class Solution 
+{
+    void reverse(int[] arr, int n) 
+    {
+        swap(arr,0,n-1);
+        public void swap(int[]arr,int left,int right)
+       {
+            if(left>=right)
+            {
+                return;
+            }
+            else
+            {
+                int temp=arr[left];
+                arr[left]=arr[right];
+                arr[right]=temp;
+                swap(arr,left+1,right-1)
+            }
+       }
+    }
+}
+
+
+
+
+
+
+
+
 public class Sol
 {
     public static void main(String args[]) 
     {
-        int count=0;
-        int index=0;
-        for(int i=1; i<=26 ; i++)
-        {
-            if(26%i==0)
-            {
-                count++;
-            }
-        }
-        int arr[]=new int[count];
-        for(int i=1; i<=26 ; i++)
-        {
-            if(26%i==0)
-            {
-                arr[index]=i;
-                index++;
-            }
-        }
-        System.out.println(java.util.Arrays.toString(arr));
+        
     }
 }
