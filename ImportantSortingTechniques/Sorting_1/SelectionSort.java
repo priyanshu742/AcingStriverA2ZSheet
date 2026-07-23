@@ -26,6 +26,7 @@ Constraints
 -104 <= nums[i] <= 104
 nums[i] may contain duplicate values.
 
+EASY
 */
 
 class Solution 
