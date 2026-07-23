@@ -1,44 +1,38 @@
 
-
-
-
-
-
-
-
 class Solution 
 {
-    void reverse(int[] arr, int n) 
+    public int[] selectionSort(int[] nums) 
     {
-        swap(arr,0,n-1);
-        public void swap(int[]arr,int left,int right)
-       {
-            if(left>=right)
+        int size=nums.length;
+        for(int i=0;i<=size-2;i++)
+        {
+            int min=i;
+            for(int j=i+1; j<=size-1;j++)
             {
-                return;
+                if(nums[j]<nums[min])
+                {
+                    int temp=nums[min];
+                    nums[min]=nums[j];
+                    nums[j]=temp;
+                }
             }
-            else
-            {
-                int temp=arr[left];
-                arr[left]=arr[right];
-                arr[right]=temp;
-                swap(arr,left+1,right-1)
-            }
-       }
+        }
+        return nums;
     }
 }
 
-
-
-
-
-
-
-
-public class Sol
+public class demo
 {
-    public static void main(String args[]) 
+    public static void main(String[] args) 
     {
-        
+        Solution s1= new Solution();
+        int nums[]={99,33,5,11,4,3,2,9,3};
+
+        int pseudo[]=s1.selectionSort(nums);
+
+        for(int n: pseudo)
+        {
+            System.out.print(n+" ");
+        }
     }
 }
