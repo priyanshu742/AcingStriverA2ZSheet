@@ -1,38 +1,42 @@
 
+
+
 class Solution 
 {
-    public int[] selectionSort(int[] nums) 
+    public int[] insertionSort(int[] nums) 
     {
         int size=nums.length;
-        for(int i=0;i<=size-2;i++)
+        for(int i=0;i<=size-1;i++)
         {
-            int min=i;
-            for(int j=i+1; j<=size-1;j++)
+            int j=i;
+            while(j>0 && nums[j-1]>nums[j])
             {
-                if(nums[j]<nums[min])
-                {
-                    int temp=nums[min];
-                    nums[min]=nums[j];
-                    nums[j]=temp;
-                }
+                int temp=nums[j-1];
+                nums[j-1]=nums[j];
+                nums[j]=temp;
+                j--;
             }
         }
         return nums;
     }
 }
 
+
+
+
 public class demo
 {
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={99,33,5,11,4,3,2,9,3};
+        int nums[]={7,4,1,5,3,9,2};
 
-        int pseudo[]=s1.selectionSort(nums);
+        int pseudo[]=s1.insertionSort(nums);
 
-        for(int n: pseudo)
+        for(int n : pseudo)
         {
-            System.out.print(n+" ");
+             System.out.println(n);
+
         }
     }
 }

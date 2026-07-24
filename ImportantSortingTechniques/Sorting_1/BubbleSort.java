@@ -1,11 +1,11 @@
 package ImportantSortingTechniques.Sorting_1;
 
 
-
 /*
 
-Given an array of integers nums, sort the array in non-decreasing order using the selection sort algorithm and return the sorted array.
-A sorted array in non-decreasing order is an array where each element is greater than or equal to all previous elements in the array.
+Given an array of integers called nums,sort the array in non-decreasing order using the bubble sort algorithm and return the sorted array.
+A sorted array in non-decreasing order is an array where each element is greater than or equal to all preceding elements in the array.
+
 
 Example 1
 Input: nums = [7, 4, 1, 5, 3]
@@ -28,21 +28,22 @@ nums[i] may contain duplicate values.
 EASY
 */
 
+
 class Solution 
 {
-    public int[] selectionSort(int[] nums) 
+    public int[] bubbleSort(int[] nums) 
     {
         int size=nums.length;
-        for(int i=0;i<=size-2;i++)
+
+        for(int i=size-1;i>=1;i--)
         {
-            int min=i;
-            for(int j=i+1; j<=size-1;j++)
+            for(int j=0 ; j<=i-1;j++)
             {
-                if(nums[j]<nums[min])
+                if(nums[j+1]<nums[j])
                 {
-                    int temp=nums[min];
-                    nums[min]=nums[j];
-                    nums[j]=temp;
+                    int temp=nums[j];
+                    nums[j]=nums[j+1];
+                    nums[j+1]=temp;
                 }
             }
         }
