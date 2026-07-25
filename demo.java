@@ -1,31 +1,33 @@
 class Solution 
 {
-    public int[] bubbleSort(int[] nums) 
+    public int[] insertionSort(int[] nums) 
     {
-        int size=nums.length;
-
-        return RecursiveSort(nums,size);
+        return Sort(nums,1);
     }
 
-    public int[] RecursiveSort(int arr[],int size)
+    public int[] Sort(int arr[],int size)
     {
+        int maxsize=arr.length-1;
         int j=size;
-        if(size<=1)
+
+        if(size>maxsize)
         {
             return arr;
         }
-        else
-        {
-            for(int i=0;i<j-1;i++)
-            {
-                if (arr[i+1]<arr[i])
-                {
-                    int temp=arr[i];
-                    arr[i]=arr[i+1];
-                    arr[i+1]=temp;
-                }
-            }
-            return RecursiveSort(arr,size-1);
+
+        RecursiveSort(arr,j);
+        
+        return Sort(arr,size+1);
+    }
+
+    public void RecursiveSort(int arr[],int j)
+    {
+        if(j>0 && arr[j]<arr[j-1])
+        { 
+            int temp=arr[j];
+            arr[j]=arr[j-1];
+            arr[j-1]=temp;
+            RecursiveSort(arr,j-1);
         }
     }
 }
@@ -36,9 +38,9 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={5,4,4,1,1};
+        int nums[]={0,8,5,1,2,4,9};
 
-        int pseudo[]=s1.bubbleSort(nums);
+        int pseudo[]=s1.insertionSort(nums);
 
         for(int n : pseudo)
         {
