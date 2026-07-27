@@ -1,72 +1,26 @@
 class Solution 
 {
-    public int[] mergeSort(int[] nums) 
+    public int removeDuplicates(int[] nums) 
     {
-        int size=nums.length;
-        int low=0;
-        int high=size-1;
-
-        return Sort(nums,low,high);
-    }
-
-    public int[] Sort(int[] nums,int low, int high)
-    { 
-        if(low>=high)
+        if(nums.length==0)
         {
-            return nums;
+            return 0;
         }
-        int mid=(low+high)/2;
+        int uniquecount=1; // first element is always unique
 
-        Sort(nums,low,mid);
-
-        Sort(nums,mid+1,high);
-
-        return Merge(nums,low,mid,high);
-    }
-
-    public int[] Merge(int nums[],int low,int mid,int high)
-    {
-
-        int temp[]=new int[nums.length];
-        int left=low;
-        int right=mid+1;
-        int index=0;
-
-        while(left<=mid && right<=high)
+        for(int i=1;i<nums.length;i++)
         {
-            if(nums[left]<=nums[right])
+            if(nums[i]!=nums[i-1])
             {
-                temp[index]=nums[left];
-                index++;
-                left++;
-            }
-            else
-            {
-                temp[index]=nums[right];
-                index++;
-                right++;
+                nums[uniquecount]=nums[i];
+                uniquecount++;
             }
         }
-
-        while(left<=mid)
+        for(int n :nums)
         {
-            temp[index]=nums[left];
-            index++;
-            left++;
+            System.out.println(n);
         }
-
-        while(high>=right)
-        {
-            temp[index]=nums[right];
-            index++;
-            right++;
-        }
-
-        for(int i=low; i<=high;i++)
-        {
-            nums[i]=temp[i-low];
-        }
-        return nums;
+        return uniquecount;  
     }
 }
 
@@ -75,13 +29,10 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={1,2,3,7,8,9,5,4,3};
+        int nums[]={-30, -30, 0, 0, 10, 20, 30, 30};
 
-        int pseudo[]=s1.mergeSort(nums);
+        int pseudo=s1.removeDuplicates(nums);
 
-        for(int n : pseudo)
-        {
-            System.out.println(n);
-        }
+        System.out.println(pseudo);
     }
 }
