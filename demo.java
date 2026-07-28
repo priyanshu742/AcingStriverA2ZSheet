@@ -1,38 +1,27 @@
 class Solution 
 {
-    public int removeDuplicates(int[] nums) 
+    public void rotateArrayByOne(int[] nums)
     {
-        if(nums.length==0)
+        int last=nums[nums.length-1];
+        for(int i=nums.length-1;i>0;i--)
         {
-            return 0;
+            nums[i]=nums[i-1];
         }
-        int uniquecount=1; // first element is always unique
-
-        for(int i=1;i<nums.length;i++)
-        {
-            if(nums[i]!=nums[i-1])
-            {
-                nums[uniquecount]=nums[i];
-                uniquecount++;
-            }
-        }
-        for(int n :nums)
-        {
-            System.out.println(n);
-        }
-        return uniquecount;  
+        nums[0]=last;
     }
 }
+
 
 public class demo
 {
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={-30, -30, 0, 0, 10, 20, 30, 30};
+        int nums[]={2,3,4,5,6,9};
 
-        int pseudo=s1.removeDuplicates(nums);
+        s1.rotateArrayByOne(nums);
 
-        System.out.println(pseudo);
+        for(int n:nums)
+        System.out.println(n);
     }
 }
