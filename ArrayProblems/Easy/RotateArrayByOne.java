@@ -29,10 +29,6 @@ Constraints
 EASY
 */
 
-
-
-
-
 class Solution 
 {
     public void rotateArrayByOne(int[] nums)
