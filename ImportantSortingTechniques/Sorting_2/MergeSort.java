@@ -1,3 +1,31 @@
+package ImportantSortingTechniques.Sorting_2;
+
+
+/*
+
+Given an array of integers, nums,sort the array in non-decreasing order using the merge sort algorithm. Return the sorted array.
+A sorted array in non-decreasing order is one in which each element is either greater than or equal to all the elements to its left in the array.
+
+Example 1
+Input: nums = [7, 4, 1, 5, 3]
+Output: [1, 3, 4, 5, 7]
+Explanation: 1 <= 3 <= 4 <= 5 <= 7.
+Thus the array is sorted in non-decreasing order.
+
+Example 2
+Input: nums = [5, 4, 4, 1, 1]
+Output: [1, 1, 4, 4, 5]
+Explanation: 1 <= 1 <= 4 <= 4 <= 5.
+Thus the array is sorted in non-decreasing order.
+
+
+Constraints
+1 <= nums.length <= 106
+-104 <= nums[i] <= 104
+nums[i] may contain duplicate values.
+
+HARD
+*/
 
 class Solution 
 {
@@ -66,20 +94,5 @@ class Solution
         }
         return nums;
         
-    }
-}
-
-
-public class demo
-{
-    public static void main(String[] args) 
-    {
-        Solution s1= new Solution();
-        int nums[]={1,4,9,2,6,7,1,86,66,22,11,99,65};
-
-        int pseudo[]=s1.mergeSort(nums);
-
-        for(int n:pseudo)
-        System.out.println(n);
     }
 }
