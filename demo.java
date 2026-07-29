@@ -2,56 +2,21 @@
 
 
 
-
 class Solution 
 {
-    public int[] quickSort(int[] nums) 
+    public void rotateArray(int[] nums, int k)
     {
-        int low=0;
-        int high=nums.length-1;
-
-        return qs(nums,low,high);
-    }
-
-    public int[] qs(int nums[],int low,int high)
-    {
-        if(low<high)
+        int size=nums.length;
+        k=k%size;
+        for(int j=1;j<=k;j++)
         {
-            int partitionIndex=partition(nums,low,high);
-            qs(nums,low,partitionIndex-1);
-            qs(nums,partitionIndex+1,high);
-            return nums;
+            int first=nums[0];
+            for(int i=0;i<size-1;i++)
+            {
+                nums[i]=nums[i+1];
+            }
+            nums[size-1]=first;
         }
-        return nums;
-    }
-
-    public int partition(int nums[],int low,int high)
-    {
-        int pivot=nums[low];
-        int i=low;
-        int j=high;
-        while(i<j)
-        {
-            while(nums[i]<=pivot && i<=high-1)
-            {
-                i++;
-            }
-             while(nums[j]>pivot && j>=low+1)
-            {
-                j--;
-            }
-            if(i<j)
-            {
-                int temp=nums[i];
-                nums[i]=nums[j];
-                nums[j]=temp;
-            }
-        }
-        int temp=nums[low];
-        nums[low]=nums[j];
-        nums[j]=temp;
-        return j;
-
     }
 }
 
@@ -61,11 +26,11 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={2,3,4,5,6,9,1,8};
+        int nums[]={2,3,4,5,1,2};
 
-        int pseudo[]=s1.quickSort(nums);
+        s1.rotateArray(nums,9);
 
-        for(int n:pseudo)
+        for(int n:nums)
         System.out.println(n);
     }
 }
