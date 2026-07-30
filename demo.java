@@ -6,14 +6,16 @@ class Solution
         int low=0;
         int high=nums.length-1;
 
-        return divide(nums,low,high);
+        divide(nums,low,high);
+
+        return nums;
     }
 
-    public int[] divide(int nums[],int low,int high)
+    public void divide(int nums[],int low,int high)
     {
         if(low>=high)
         {
-            return nums;
+            return;
         }
         int mid=(low+high)/2;
 
@@ -21,10 +23,10 @@ class Solution
 
         divide(nums,mid+1,high);
 
-        return merge(nums,low,mid,high);
+        merge(nums,low,mid,high);
     }
 
-    public int[] merge(int nums[],int low,int mid,int high)
+    public void merge(int nums[],int low,int mid,int high)
     {
         int temp[]=new int[high-low+1];
         int index=0;
@@ -64,8 +66,6 @@ class Solution
         {
             nums[i]=temp[i-low];
         }
-        return nums;
-        
     }
 }
 
@@ -75,7 +75,7 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={1,4,9,2,6,7,1,86,66,22,11,99,65};
+        int nums[]={3,1,4,9,6};
 
         int pseudo[]=s1.mergeSort(nums);
 
