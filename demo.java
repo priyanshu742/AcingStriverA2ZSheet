@@ -1,70 +1,33 @@
-
 class Solution 
 {
-    public int[] mergeSort(int[] nums) 
+    public void moveZeroes(int[] nums) 
     {
-        int low=0;
-        int high=nums.length-1;
-
-        divide(nums,low,high);
-
-        return nums;
-    }
-
-    public void divide(int nums[],int low,int high)
-    {
-        if(low>=high)
+        // OPTIMAL SOLUTION
+        int j=-1;
+        for(int z=0;z<nums.length;z++)
         {
-            return;
-        }
-        int mid=(low+high)/2;
-
-        divide(nums,low,mid);
-
-        divide(nums,mid+1,high);
-
-        merge(nums,low,mid,high);
-    }
-
-    public void merge(int nums[],int low,int mid,int high)
-    {
-        int temp[]=new int[high-low+1];
-        int index=0;
-
-        int left=low;
-        int right=mid+1;
-
-        while(left<=mid && right<=high)
-        {
-            if(nums[left]<=nums[right])
+            if(nums[z]==0)
             {
-                temp[index]=nums[left];
-                index++;
-                left++;
-            }
-            else
-            {
-                temp[index]=nums[right];
-                index++;
-                right++;
+                j=z;
+                break;
             }
         }
-        while(left<=mid)
-        {
-            temp[index]=nums[left];
-            index++;
-            left++;
-        }
-        while(right<=high)
-        {
-            temp[index]=nums[right];
-            index++;
-            right++;
-        }
 
-        for(int i=low;i<=high;i++)
+        if(j==-1)
         {
-            nums[i]=temp[i-low];
+            return ;
+        }
+        int i=0;
+
+        for(i=j+1;i<nums.length;i++)
+        {
+            if(nums[i]!=0)
+            {
+                int temp=nums[j];
+                nums[j]=nums[i];
+                nums[i]=temp;
+                j++;
+            }
         }
     }
 }
@@ -75,11 +38,11 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={3,1,4,9,6};
+        int nums[]={3,0,1,0,4,0,9,6};
 
-        int pseudo[]=s1.mergeSort(nums);
+        s1.moveZeroes(nums);
 
-        for(int n:pseudo)
+        for(int n:nums)
         System.out.println(n);
     }
 }
