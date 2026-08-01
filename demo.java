@@ -1,34 +1,24 @@
+import java.util.HashMap;
+import java.util.Map;
+
 class Solution 
 {
-    public void moveZeroes(int[] nums) 
+    public int singleNumber(int[] nums) 
     {
-        // OPTIMAL SOLUTION
-        int j=-1;
-        for(int z=0;z<nums.length;z++)
+        Map<Integer,Integer> dict=new HashMap<>();
+        for(int n : nums)
         {
-            if(nums[z]==0)
-            {
-                j=z;
-                break;
-            }
+            dict.put(n,dict.getOrDefault(n,0)+1);
         }
 
-        if(j==-1)
+        for(int n : dict.keySet())
         {
-            return ;
-        }
-        int i=0;
-
-        for(i=j+1;i<nums.length;i++)
-        {
-            if(nums[i]!=0)
+            if(dict.get(n)==1)
             {
-                int temp=nums[j];
-                nums[j]=nums[i];
-                nums[i]=temp;
-                j++;
+                return n;
             }
         }
+        return 0;
     }
 }
 
@@ -38,11 +28,9 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={3,0,1,0,4,0,9,6};
+        int nums[]={1,2,4,3,4,6,2,1,3,9,8,9,8};
 
-        s1.moveZeroes(nums);
-
-        for(int n:nums)
-        System.out.println(n);
+        int result = s1.singleNumber(nums);
+        System.out.println(result);
     }
 }
