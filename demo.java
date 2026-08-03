@@ -3,34 +3,38 @@ import java.util.Map;
 
 class Solution 
 {
-    public int singleNumber(int[] nums) 
+    public int[] twoSum(int[] nums, int target) 
     {
-        Map<Integer,Integer> dict=new HashMap<>();
-        for(int n : nums)
-        {
-            dict.put(n,dict.getOrDefault(n,0)+1);
-        }
+        int result[]=new int[2];
 
-        for(int n : dict.keySet())
+        Map<Integer,Integer> dict=new HashMap<>();
+
+        for(int i=0;i<nums.length;i++)
         {
-            if(dict.get(n)==1)
+            int complement=target-nums[i];
+
+            if(dict.containsKey(complement))
             {
-                return n;
+                result[0]=dict.get(complement);
+                result[1]=i;
+                return result;
             }
+            dict.put(nums[i],i);
         }
-        return 0;
+        return result;
     }
 }
-
 
 public class demo
 {
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={1,2,4,3,4,6,2,1,3,9,8,9,8};
+        int nums[]={4,1,9,3,7,2};
 
-        int result = s1.singleNumber(nums);
-        System.out.println(result);
+        int result[] = s1.twoSum(nums,10);
+        for(int n:result)
+        System.out.println(n);
+
     }
 }
