@@ -30,8 +30,6 @@ Only one valid answer exists.
 EASY
 */
 
-
-
 class Solution 
 {
     public int[] twoSum(int[] nums, int target) 
