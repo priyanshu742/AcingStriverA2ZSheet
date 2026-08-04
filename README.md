@@ -9,27 +9,6 @@ Prepare for coding interviews and competitive programming.
 Track my progress consistently.
 Build a well-organized collection of DSA solutions for future revision.
 
-Repository Structure
-Striver-A2Z-Sheet/
-│
-├── Arrays/
-├── Binary_Search/
-├── Strings/
-├── Recursion/
-├── Linked_List/
-├── Stacks_and_Queues/
-├── Sliding_Window/
-├── Trees/
-├── BST/
-├── Graphs/
-├── Heap/
-├── Greedy/
-├── Dynamic_Programming/
-├── Tries/
-├── Bit_Manipulation/
-├── README.md
-└── Progress.md
-
 Solution Format
 
 Each solution includes:
