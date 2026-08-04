@@ -27,7 +27,6 @@ One value appears more than n/2 times.
 EASY
 */
 
-
 class Solution 
 {
     public int majorityElement(int[] nums) 
