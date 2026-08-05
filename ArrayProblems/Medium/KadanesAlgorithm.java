@@ -24,13 +24,12 @@ Constraints
 EASY
 */
 
-
 class Solution 
 {
     public int maxSubArray(int[] nums) 
     {
         //KADANE'S ALGORITHM (OPTIMAL)
-
+        
         int maxi=Integer.MIN_VALUE;
         int sum=0;
 

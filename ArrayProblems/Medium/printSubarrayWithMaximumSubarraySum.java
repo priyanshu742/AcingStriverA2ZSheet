@@ -1,30 +1,25 @@
 package ArrayProblems.Medium;
 
+
 /* 
+	
+QUESTION Print subarray with maximum subarray sum (extended version of  problem of KADANE'S ALGORITHM)
 
 Given an integer array nums, find the subarray with the largest sum and return the sum of the elements present in that subarray.
 A subarray is a contiguous non-empty sequence of elements within an array.
 
-
 Example 1
-
 Input: nums = [2, 3, 5, -2, 7, -4]
-
 Output: 15
-
 Explanation:
-
 The subarray from index 0 to index 4 has the largest sum = 15
 
 Example 2
-
 Input: nums = [-2, -3, -7, -2, -10, -4]
-
 Output: -2
-
 Explanation:
-
 The element on index 0 or index 3 make up the largest sum when taken as a subarray
+
 
 Constraints
 1 <= nums.length <= 105
@@ -32,10 +27,14 @@ Constraints
 
 EASY
 */
+
+
 class Solution 
 {
     public int maxSubArray(int[] nums) 
     {
+        //IF WE WANT TO Print subarray with maximum subarray sum THEN --
+        
         int maxi=Integer.MIN_VALUE;
         int sum=0;
         int start=0;
@@ -68,17 +67,5 @@ class Solution
             System.out.print(nums[i]+" ");
         }
         return maxi;
-    }
-}
-
-public class demo
-{
-    public static void main(String[] args) 
-    {
-        Solution s1= new Solution();
-        int nums[]={2,3,-2,1,4,-10,4,6,7,0,0,1,-2,4};
-
-        int result = s1.maxSubArray(nums);
-        System.out.println(result);
     }
 }
