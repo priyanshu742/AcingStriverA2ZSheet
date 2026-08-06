@@ -1,80 +1,57 @@
 class Solution 
 {
-    public int[] rearrangeArray(int[] nums) 
+    public void nextPermutation(int[] nums) 
     {
-        // BRUTE
+        int size=nums.length;
+        int index=-1;
 
-        int positive=0;
-        int negative=0;
-        
-        for(int i=0;i<nums.length;i++)
+        for(int i=size-2;i>=0;i--)
         {
-            if(nums[i]>0)
+            if(nums[i]<nums[i+1])
             {
-                positive++;
-            }
-            else
-            {
-                negative++;
+                index=i;
+                break;
             }
         }
-
-        int pos[]=new int[positive];
-        int neg[]=new int[negative];
-        int posIndex=0;
-        int negIndex=0;
-
-        for(int i=0;i<nums.length;i++)
+        if(index == -1)
         {
-            if(nums[i]>=0)
+            for(int i=0;i<size/2;i++)
             {
-                pos[posIndex]=nums[i];
-                posIndex++;
+                int temp=nums[i];
+                nums[i]=nums[size-1-i];
+                nums[size-1-i]=temp;
             }
-            else
-            {
-                neg[negIndex]=nums[i];
-                negIndex++;
-            }
-        }
-        posIndex=0;
-        negIndex=0;
-
-        if(pos.length>neg.length)
-        {
-            int index=2*neg.length;
-            for(int i=0;i<neg.length;i++)
-            {
-                nums[2*i]=pos[posIndex];
-                nums[(2*i)+1]=neg[negIndex];
-                posIndex++;
-                negIndex++;
-            }
-            for(int i=neg.length;i<pos.length;i++)
-            {
-                nums[index]=pos[posIndex];
-                index++;
-                posIndex++;
-            }
+            return;
         }
         else
         {
-            int index=2*pos.length;
-            for(int i=0;i<pos.length;i++)
+            for(int i=size-1;i>index;i--)
             {
-                nums[2*i]=pos[posIndex];
-                nums[(2*i)+1]=neg[negIndex];
-                posIndex++;
-                negIndex++;
-            }
-            for(int i=pos.length;i<neg.length;i++)
-            {
-                nums[index]=neg[negIndex];
-                index++;
-                negIndex++;
+                if(nums[i]>nums[index])
+                {
+                    int temp=nums[index];
+                    nums[index]=nums[i];
+                    nums[i]=temp;
+                    break;
+                }
             }
         }
-        return nums;
+        int start=index+1;
+        int end=size-1;
+        while(start<end)
+        {
+            int temp=nums[start];
+            nums[start]=nums[end];
+            nums[end]=temp;
+            start++;
+            end--;
+        }
+
+        System.out.println("Next Permutation is: ");
+        for(int i=0;i<size;i++)
+        {
+            System.out.print(nums[i]+" ");
+        }
     }
 }
 
@@ -83,9 +60,8 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={2, 4, 5, -1, -3, -4,8,8,9,6,-7,-5,-7,-8,-2,-3};
+        int nums[]={3,2,1};
 
-        int result[] = s1.rearrangeArray(nums);
-        System.out.println(java.util.Arrays.toString(result));
+        s1.nextPermutation(nums);
     }
 }
