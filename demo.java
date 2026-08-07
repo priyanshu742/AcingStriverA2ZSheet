@@ -1,57 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution 
 {
-    public void nextPermutation(int[] nums) 
+    public List<Integer> leaders(int[] nums) 
     {
         int size=nums.length;
-        int index=-1;
+        List<Integer> ans= new ArrayList<>();
 
-        for(int i=size-2;i>=0;i--)
+        int maxi=Integer.MIN_VALUE;
+
+        for(int i=size-1;i>=0;i--)
         {
-            if(nums[i]<nums[i+1])
+            if(nums[i]>maxi)
             {
-                index=i;
-                break;
+                ans.add(nums[i]);
             }
+            maxi=Math.max(maxi,nums[i]);
         }
-        if(index == -1)
-        {
-            for(int i=0;i<size/2;i++)
-            {
-                int temp=nums[i];
-                nums[i]=nums[size-1-i];
-                nums[size-1-i]=temp;
-            }
-            return;
-        }
-        else
-        {
-            for(int i=size-1;i>index;i--)
-            {
-                if(nums[i]>nums[index])
-                {
-                    int temp=nums[index];
-                    nums[index]=nums[i];
-                    nums[i]=temp;
-                    break;
-                }
-            }
-        }
-        int start=index+1;
-        int end=size-1;
+        int start=0;
+        int end=ans.size()-1;
         while(start<end)
         {
-            int temp=nums[start];
-            nums[start]=nums[end];
-            nums[end]=temp;
-            start++;
-            end--;
+            int temp=ans.get(start);
+            ans.set(start,ans.get(end));
+            ans.set(end,temp);
         }
-
-        System.out.println("Next Permutation is: ");
-        for(int i=0;i<size;i++)
-        {
-            System.out.print(nums[i]+" ");
-        }
+        return ans;
     }
 }
 
@@ -60,8 +35,13 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={3,2,1};
+        int nums[]={-3, 4, 5, 1, -4, -5};
 
-        s1.nextPermutation(nums);
+        List<Integer> result=s1.leaders(nums);
+
+        for(int n: result)
+        {
+            System.out.println(n);
+        }
     }
 }
