@@ -1,32 +1,31 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 class Solution 
 {
-    public List<Integer> leaders(int[] nums) 
+    public int longestConsecutive(int[] nums)
     {
-        int size=nums.length;
-        List<Integer> ans= new ArrayList<>();
-
-        int maxi=Integer.MIN_VALUE;
-
-        for(int i=size-1;i>=0;i--)
+        int longest=1;
+        Set<Integer> result=new HashSet<>();
+        for(int n:nums)
         {
-            if(nums[i]>maxi)
+            result.add(n);
+        }
+        for(int n: result)
+        {
+            if(!result.contains(n-1))
             {
-                ans.add(nums[i]);
+                int count=1;
+                int x=n;
+                while(result.contains(x+1))
+                {
+                    x=x+1;
+                    count=count+1;
+                }
+                longest=Math.max(longest,count);
             }
-            maxi=Math.max(maxi,nums[i]);
         }
-        int start=0;
-        int end=ans.size()-1;
-        while(start<end)
-        {
-            int temp=ans.get(start);
-            ans.set(start,ans.get(end));
-            ans.set(end,temp);
-        }
-        return ans;
+        return longest;
     }
 }
 
@@ -35,13 +34,15 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={-3, 4, 5, 1, -4, -5};
+        int nums[]={0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
 
-        List<Integer> result=s1.leaders(nums);
+        int result=s1.longestConsecutive(nums);
 
-        for(int n: result)
-        {
-            System.out.println(n);
-        }
+        System.out.println(result);
+
+       // for(int n: result)
+       // {
+            //System.out.println(n);
+       // }
     }
 }
