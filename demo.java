@@ -1,31 +1,25 @@
-import java.util.HashSet;
-import java.util.Set;
-
 class Solution 
 {
-    public int longestConsecutive(int[] nums)
+    public void rotateMatrix(int[][] matrix) 
     {
-        int longest=1;
-        Set<Integer> result=new HashSet<>();
-        for(int n:nums)
+        int n=matrix.length;
+        int result[][]=new int[n][n];
+
+        for(int i=0;i<n;i++)
         {
-            result.add(n);
-        }
-        for(int n: result)
-        {
-            if(!result.contains(n-1))
+            for(int j=0;j<n;j++)
             {
-                int count=1;
-                int x=n;
-                while(result.contains(x+1))
-                {
-                    x=x+1;
-                    count=count+1;
-                }
-                longest=Math.max(longest,count);
+                result[j][n-1-i]=matrix[i][j];
             }
         }
-        return longest;
+        for(int nw[]: result)
+        {
+            for(int m:nw)
+            {
+                System.out.print(m);
+            }
+            System.out.println();
+        }
     }
 }
 
@@ -34,15 +28,12 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[]={0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+        int nums[][]={{0,1,2,0},{3,4,5,2},{1,3,1,5},{3,5,6,7}};
 
-        int result=s1.longestConsecutive(nums);
+        s1.rotateMatrix(nums);
 
-        System.out.println(result);
+       // System.out.println(result);
 
-       // for(int n: result)
-       // {
-            //System.out.println(n);
-       // }
+       
     }
 }
