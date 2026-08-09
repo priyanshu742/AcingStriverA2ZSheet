@@ -1,5 +1,36 @@
+package ArrayProblems.Medium;
+
 import java.util.ArrayList;
 import java.util.List;
+
+
+/* 
+
+Given an M * N matrix, print the elements in a clockwise spiral manner.
+Return an array with the elements in the order of their appearance when printed in a spiral manner.
+
+Example 1
+Input: matrix = [[1, 2, 3], [4 ,5 ,6], [7, 8, 9]]
+Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
+Explanation:
+The elements in the spiral order are 1, 2, 3 -> 6, 9 -> 8, 7 -> 4, 5
+
+Example 2
+Input: matrix = [[1, 2, 3, 4], [5, 6, 7, 8]]
+Output: [1, 2, 3, 4, 8, 7, 6, 5]
+Explanation:
+The elements in the spiral order are 1, 2, 3, 4 -> 8, 7, 6, 5
+
+
+Constraints
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 100
+-100 <= matrix[i][j] <= 100
+
+EASY
+*/
+
 
 class Solution 
 {
@@ -55,20 +86,5 @@ class Solution
             }
         }
         return ans;
-    }
-}
-
-public class demo
-{
-    public static void main(String[] args) 
-    {
-        Solution s1= new Solution();
-        int nums[][]={{1,2,3,4,5,6},{20,21,22,23,24,7},{19,32,33,34,25,8},{18,31,36,35,26,9},{17,30,29,28,27,10},{16,15,14,13,12,11}};
-
-        List<Integer> result=s1.spiralOrder(nums);
-
-       System.out.println(result);
-
-       
     }
 }
