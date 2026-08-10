@@ -1,60 +1,30 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class Solution 
 {
-    public List<Integer> spiralOrder(int[][] matrix) 
+    public List<Integer> majorityElementTwo(int[] nums) 
     {
-        // optimal approach
-        //right -> bottom -> left -> top
+        int reqFrequency=nums.length/3;
+        Map<Integer,Integer> dict= new HashMap<>();
+        List<Integer> arr=new ArrayList<>();
 
-        List<Integer> ans=new ArrayList<>();
-
-        int rowLength=matrix.length;
-        int columnLength=matrix[0].length;
-
-        int left=0;
-        int right=columnLength-1;
-        int top=0;
-        int bottom=rowLength-1;
-
-        while(left<=right && top<=bottom)
+        for(int n: nums)
         {
-            // moving right
-            for(int i=left;i<=right;i++)
-            {
-                ans.add(matrix[top][i]);
-            }
-            top++;
+            dict.put(n,dict.getOrDefault(n,0)+1);
+        }
 
-            // moving bottom
-            for(int i=top;i<=bottom;i++)
+        for(int key: dict.keySet())
+        {
+            if(dict.get(key)>reqFrequency)
             {
-                ans.add(matrix[i][right]);
-            }
-            right--;
-
-            // moving left
-            if(top<=bottom)
-            {
-                for(int i=right;i>=left;i--)
-                {
-                    ans.add(matrix[bottom][i]);
-                }
-                bottom--;
-            }
-
-            // moving top
-            if(left<=right)
-            {
-                for(int i=bottom;i>=top;i--)
-                {
-                    ans.add(matrix[i][left]);
-                }
-                left++;
+                arr.add(key);
             }
         }
-        return ans;
+        return arr;
+        
     }
 }
 
@@ -63,11 +33,11 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[][]={{1,2,3,4,5,6},{20,21,22,23,24,7},{19,32,33,34,25,8},{18,31,36,35,26,9},{17,30,29,28,27,10},{16,15,14,13,12,11}};
+        int nums[] = {1, 2, 1, 1, 3, 2};
 
-        List<Integer> result=s1.spiralOrder(nums);
+        List<Integer> result=s1.majorityElementTwo(nums);
 
-       System.out.println(result);
+        System.out.println(result);
 
        
     }
