@@ -5,26 +5,19 @@ import java.util.Map;
 
 class Solution 
 {
-    public List<Integer> majorityElementTwo(int[] nums) 
+    public int pascalTriangleI(int r, int c) 
     {
-        int reqFrequency=nums.length/3;
-        Map<Integer,Integer> dict= new HashMap<>();
-        List<Integer> arr=new ArrayList<>();
+        int n=r-1;
+        int k=c-1;
 
-        for(int n: nums)
-        {
-            dict.put(n,dict.getOrDefault(n,0)+1);
-        }
+        int result=1;
 
-        for(int key: dict.keySet())
+        for(int i=0;i<k;i++)
         {
-            if(dict.get(key)>reqFrequency)
-            {
-                arr.add(key);
-            }
+            result=result*(n-i);
+            result=result/(i+1);
         }
-        return arr;
-        
+        return result;
     }
 }
 
@@ -35,7 +28,7 @@ public class demo
         Solution s1= new Solution();
         int nums[] = {1, 2, 1, 1, 3, 2};
 
-        List<Integer> result=s1.majorityElementTwo(nums);
+        int result=s1.pascalTriangleI(4,2);
 
         System.out.println(result);
 
