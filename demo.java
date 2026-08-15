@@ -9,31 +9,44 @@ import java.util.Set;
 
 class Solution 
 {
-    public List<List<Integer>> fourSum(int[] nums, int target) 
+    public List<List<Integer>> mergeOverlap(List<List<Integer>> intervals) 
     {
-        // Brute
-        Set<List<Integer>> result=new HashSet<>();
-        for(int i=0;i<nums.length;i++)
+        intervals.sort((a,b) -> 
         {
-            for(int j=i+1;j<nums.length;j++)
+            if(a.get(0)==b.get(0))
             {
-                for(int k=j+1;k<nums.length;k++)
+                return Integer.compare(a.get(1),b.get(1));
+            }
+            return Integer.compare(a.get(0),b.get(0));
+        });
+
+        List<List<Integer>> result =new ArrayList<>();
+
+        for(int i=0;i<intervals.size();i++)
+        {
+            int start=intervals.get(i).get(0);
+            int end=intervals.get(i).get(1);
+            if(!result.isEmpty() && end<=result.get(result.size()-1).get(1))
+            {
+                continue;
+            }
+            for(int j=i+1;j<intervals.size();j++)
+            {
+                if(intervals.get(j).get(0)<=end)
                 {
-                    for(int l=k+1;l<nums.length;l++)
-                    {
-                        if(nums[i]+nums[j]+nums[k]+nums[l]==target)
-                        {
-                            List<Integer> ans=Arrays.asList(nums[i],nums[j],nums[k],nums[l]);
-                            Collections.sort(ans);
-                            result.add(ans);
-                        }
-                    }
+                    end=Math.max(intervals.get(j).get(1),end);
+                }
+                else
+                {
+                    break;
                 }
             }
+            result.add(Arrays.asList(start,end));
         }
-        return new ArrayList<>(result);
+        return result;
     }
 }
+
 public class demo
 {
     public static void main(String[] args) 
