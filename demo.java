@@ -9,41 +9,33 @@ import java.util.Set;
 
 class Solution 
 {
-    public List<List<Integer>> mergeOverlap(List<List<Integer>> intervals) 
+    public int[] findMissingRepeatingNumbers(int[] nums) 
     {
-        intervals.sort((a,b) -> 
-        {
-            if(a.get(0)==b.get(0))
-            {
-                return Integer.compare(a.get(1),b.get(1));
-            }
-            return Integer.compare(a.get(0),b.get(0));
-        });
+        //Mathematics optimal approach
 
-        List<List<Integer>> result =new ArrayList<>();
+        //S-Sn
+        //S2 -S2n
+        int size=nums.length;
 
-        for(int i=0;i<intervals.size();i++)
+        int S=0;
+        long Sn=(size*(size+1))/2;
+
+        long S2=0;
+        long S2n=(size*(size+1)*((2*size)+1))/6;
+        for(int i=0;i<nums.length;i++)
         {
-            int start=intervals.get(i).get(0);
-            int end=intervals.get(i).get(1);
-            if(!result.isEmpty() && end<=result.get(result.size()-1).get(1))
-            {
-                continue;
-            }
-            for(int j=i+1;j<intervals.size();j++)
-            {
-                if(intervals.get(j).get(0)<=end)
-                {
-                    end=Math.max(intervals.get(j).get(1),end);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            result.add(Arrays.asList(start,end));
+            S+=nums[i];
+            S2+=(long)(nums[i]*nums[i]);
         }
-        return result;
+
+        long val1=S-Sn; //x-y
+        long val2=S2-S2n;
+        val2=val2/val1; //x+y
+
+        long x=(val1+val2)/2; // twice
+        long y=x-val1; // missing
+
+        return new int[]{(int)x,(int)y} ;
     }
 }
 
@@ -52,12 +44,11 @@ public class demo
     public static void main(String[] args) 
     {
         Solution s1= new Solution();
-        int nums[] = {1,0,-1,0,-2,2};
+        int nums[] ={ 6, 5, 7, 1, 8, 6, 4, 3, 2};
 
-        List<List<Integer>> result=s1.fourSum(nums,0);
+        int result[]=s1.findMissingRepeatingNumbers(nums);
 
-        System.out.println(result);
-
-       
+        for(int n: result)
+        System.out.println(n);
     }
 }
