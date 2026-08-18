@@ -9,33 +9,66 @@ import java.util.Set;
 
 class Solution 
 {
-    public int[] findMissingRepeatingNumbers(int[] nums) 
+    // optimal
+    public long numberOfInversions(int[] nums) 
     {
-        //Mathematics optimal approach
+        return mergeSort(nums,0,nums.length-1);
+    }
 
-        //S-Sn
-        //S2 -S2n
-        int size=nums.length;
-
-        int S=0;
-        long Sn=(size*(size+1))/2;
-
-        long S2=0;
-        long S2n=(size*(size+1)*((2*size)+1))/6;
-        for(int i=0;i<nums.length;i++)
+    public int mergeSort(int arr[],int low,int high)
+    {
+        int count=0;
+        if(low>=high)
         {
-            S+=nums[i];
-            S2+=(long)(nums[i]*nums[i]);
+            return count;
         }
+        int mid=(low+high)/2;
+        count+=mergeSort(arr,low,mid);
+        count+=mergeSort(arr,mid+1,high);
+        count+=merge(arr,low,mid,high);
+        return count;
+    }
 
-        long val1=S-Sn; //x-y
-        long val2=S2-S2n;
-        val2=val2/val1; //x+y
-
-        long x=(val1+val2)/2; // twice
-        long y=x-val1; // missing
-
-        return new int[]{(int)x,(int)y} ;
+    public int merge(int arr[],int low,int mid,int high)
+    {
+        int count=0;
+        int index=0;
+        int temp[]=new int[high-low+1];
+        int left=low;
+        int right=mid+1;
+        while(left<=mid && right <=high)
+        {
+            if (arr[left]<=arr[right])
+            {
+                temp[index]=arr[left];
+                index++;
+                left++;
+            }
+            //right is smaller
+            else
+            {
+                temp[index]=arr[right];
+                index++;
+                right++;
+            }
+        }
+        while(left<=mid)
+        {
+            temp[index]=arr[left];
+            index++;
+            left++;
+        }
+        while(right<=high)
+        {
+            temp[index]=arr[right];
+            index++;
+            right++;
+        }
+        for(int i=low;i<=high;i++)
+        {
+            arr[i]=temp[i-low];
+        }
+        return count;
     }
 }
 
