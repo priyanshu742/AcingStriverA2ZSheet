@@ -1,12 +1,34 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+package ArrayProblems.Hard;
 
+/* 
+
+Given an integer array nums. Return the number of reverse pairs in the array.
+An index pair (i, j) is called a reverse pair if:
+0 <= i < j < nums.length
+nums[i] > 2 * nums[j]
+
+Example 1
+Input: nums = [6, 4, 1, 2, 7]
+Output: 3
+Explanation:
+The reverse pairs are:
+(0, 2) : nums[0] = 6, nums[2] = 1, 6 > 2 * 1
+(0, 3) : nums[0] = 6, nums[3] = 2, 6 > 2 * 2
+(1, 2) : nums[1] = 4, nums[2] = 1, 4 > 2 * 1
+
+Example 2
+Input: nums = [5, 4, 4, 3, 3]
+Output: 0
+Explanation:
+No pairs satisfy both the conditons.
+
+
+Constraints
+1 <= nums.length <= 5 * 104
+-231 <= nums[i] <= 231 - 1
+
+MEDIUM;
+*/
 
 class Solution 
 {
@@ -49,7 +71,7 @@ class Solution
     public void merge(int[] nums,int low,int mid,int high) 
     {
         int index=0;
-        int left=0;
+        int left=low;
         int right=mid+1;
         int temp[]=new int[high-low+1];
 
@@ -84,19 +106,5 @@ class Solution
         {
             nums[i]=temp[i-low];
         }
-    }
-}
-
-public class demo
-{
-    public static void main(String[] args) 
-    {
-        Solution s1= new Solution();
-        int nums[] ={ 6, 5, 7, 1, 8, 6, 4, 3, 2};
-
-        int result[]=s1.findMissingRepeatingNumbers(nums);
-
-        for(int n: result)
-        System.out.println(n);
     }
 }
