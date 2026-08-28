@@ -2,26 +2,25 @@ package BinarySearch.BSOn1DArrays;
 
 /*
 
-Given an integer array nums, sorted in ascending order (with distinct values) and a target value k.
-The array is rotated at some pivot point that is unknown.
-Find the index at which k is present and if k is not present return -1.
+Given an integer array nums, sorted in ascending order (may contain duplicate values) and a target value k. 
+Now the array is rotated at some pivot point unknown to you.
+Return True if k is present and otherwise, return False.
 
 Example 1
-Input : nums = [4, 5, 6, 7, 0, 1, 2], k = 0
-Output: 4
-Explanation: Here, the target is 0. We can see that 0 is present in the given rotated sorted array, nums. Thus, we get output as 4, which is the index at which 0 is present in the array.
+Input : nums = [7, 8, 1, 2, 3, 3, 3, 4, 5, 6], k = 3
+Output: True
+Explanation: The element 3 is present in the array. So, the answer is True.
 
 Example 2
-Input: nums = [4, 5, 6, 7, 0, 1, 2], k = 3
-Output: -1
-Explanation: Here, the target is 3. Since 3 is not present in the given rotated sorted array. Thus, we get the output as -1.
+Input : nums = [7, 8, 1, 2, 3, 3, 3, 4, 5, 6], k = 10
+Output: False
+Explanation:The element 10 is not present in the array. So, the answer is False.
 
 
 Constraints
 1 <= nums.length <= 104
 -104 <= nums[i] <= 104
-All values of nums are unique.
-nums is an ascending array that is possibly rotated.
+nums is guaranteed to be rotated at some pivot.
 -104 <= k <= 104
 
 EASY
@@ -29,7 +28,7 @@ EASY
 
 class Solution 
 {
-    public int search(int[] nums, int k) 
+    public boolean searchInARotatedSortedArrayII(int[] nums, int k) 
     {
         int low=0;
         int high=nums.length-1;
@@ -39,10 +38,16 @@ class Solution
             int mid=low+(high-low)/2;
             if(nums[mid]==k)
             {
-                return mid;
+                return true;
             }
             
-            // If left half is sorted
+            if(nums[low]==nums[mid] && nums[mid]==nums[high])
+            {
+                low=low+1;
+                high=high-1;
+                continue;
+            }
+            // If the left half is sorted
             if(nums[low]<=nums[mid])
             {
                 if(nums[low]<=k && k<=nums[mid])
@@ -67,6 +72,6 @@ class Solution
                 }
             }
         }
-        return -1;
+        return false;
     }
 }
