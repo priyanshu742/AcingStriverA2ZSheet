@@ -1,4 +1,4 @@
-package BinarySearch.BSOnArrays;
+package BinarySearch.BSOnAnswers;
 
 /*
 
@@ -21,6 +21,7 @@ Constraints
 
 MEDIUM
 */
+
 class Solution 
 {
     public int floorSqrt(int n) 
