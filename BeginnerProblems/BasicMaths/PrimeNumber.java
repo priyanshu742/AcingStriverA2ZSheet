@@ -1,4 +1,4 @@
-package BeginnerProblems.BasicMaths;
+package BeginnerProblems.basicMaths;
 
 /*
 
