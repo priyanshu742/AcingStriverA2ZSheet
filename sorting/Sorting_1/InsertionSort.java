@@ -1,4 +1,4 @@
-package ImportantSortingTechniques.Sorting_1;
+package sorting.Sorting_1;
 
 
 

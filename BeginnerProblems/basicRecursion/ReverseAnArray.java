@@ -1,4 +1,4 @@
-package BeginnerProblems.LearnBasicRecursion;
+package BeginnerProblems.basicRecursion;
 
 
 /*

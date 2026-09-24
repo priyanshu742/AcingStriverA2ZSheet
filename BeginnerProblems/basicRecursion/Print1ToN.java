@@ -1,24 +1,26 @@
-package BeginnerProblems.LearnBasicRecursion;
+package BeginnerProblems.basicRecursion;
 
-/* 
 
-Given an integer n, write a function to print all numbers from n to 1 (inclusive) using recursion.
+/*
+
+Given an integer n, write a function to print all numbers from 1 to n (inclusive) using recursion.
 You must not use any loops such as for, while, or do-while.
-The function should print each number on a separate line, in decreasing order from n to 1
+The function should print each number on a separate line, in increasing order from 1 to n.
+
 
 Example 1
-Input: 5
+Input: n = 5
 Output:
+1  
+2  
+3  
+4  
 5
-4
-3
-2
-1
 
 Example 2
-Input: 1
+Input: n = 1
 Output:
-1
+1 
 
 
 Constraints
@@ -38,9 +40,10 @@ class Solution
         }
         else
         {
-            System.out.println(n);
             printNumbers(n-1);
-        }
+            System.out.println(n);
+        }   
     }
 }
     
+

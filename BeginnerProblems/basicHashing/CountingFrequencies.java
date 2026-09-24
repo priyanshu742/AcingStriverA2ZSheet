@@ -1,4 +1,4 @@
-package BeginnerProblems.LearnBasicHashing;
+package BeginnerProblems.basicHashing;
 import java.util.*;
 
 
