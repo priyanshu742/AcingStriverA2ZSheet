@@ -24,6 +24,7 @@ Constraints:
 
 EASY
 */
+
 class Solution 
 {
     public int[] divisors(int n) 
