@@ -31,23 +31,21 @@ Constraints
 HARD
 */
 
-
 class Solution 
 {
     public List<List<Integer>> countFrequencies(int[] nums) 
     {  // Your code goes here
-        Map<Integer,Integer> freqMap=new HashMap<>();
+        Map<Integer,Integer> dict=new HashMap<>();
 
         for(int n: nums)
         {
-           freqMap.put(n,freqMap.getOrDefault(n,0)+1);
+           dict.put(n,dict.getOrDefault(n,0)+1);
         }
 
         List<List<Integer>> result= new ArrayList<>();
-        for(int key : freqMap.keySet())
+        for(int key : dict.keySet())
         {
-            int value=freqMap.get(key);
-            
+            int value=dict.get(key);
             List<Integer> pair= Arrays.asList(key,value);
             result.add(pair);
         }

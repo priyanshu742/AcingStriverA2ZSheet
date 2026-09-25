@@ -14,7 +14,6 @@ Please note that this section might seem a bit difficult without prior knowledge
 we will soon try to add basics concepts for your ease! 
 If you know the concepts already please go ahead to give a shot to the problem. Cheers!
 
-
 Example 1
 Input: nums = [1, 2, 2, 3, 3, 3]
 Output: 3
@@ -25,6 +24,9 @@ Input: nums = [4, 4, 5, 5, 6]
 Output: 4
 Explanation: Both 4 and 5 appear twice, but 4 is smaller. So, 4 is the most frequent element.
 
+Example 3:
+Input: nums = [2, 4, 3, 2, 5, 4]
+Output: 2
 
 Constraints
 1 <= n <= 105
@@ -37,30 +39,30 @@ class Solution
 {
     public int mostFrequentElement(int[] nums) 
     {
-        int maxFreq=0;
-        int high=0;
-        Map<Integer,Integer> FreqMap=new HashMap<>();
-        for(int n : nums)
+        int highestFrequency=0;
+        int element=0;
+        Map<Integer,Integer> dict=new HashMap<>();
+        for(int n: nums)
         {
-            FreqMap.put(n,FreqMap.getOrDefault(n,0)+1);
+            dict.put(n,dict.getOrDefault(n,0)+1);
         }
-
-        for(int key:FreqMap.keySet())
+        for(int key: dict.keySet())
         {
-            if(FreqMap.get(key)>maxFreq)
+            int frequency=dict.get(key);
+            if(frequency>highestFrequency)
             {
-                maxFreq=FreqMap.get(key);
-                high=key;
+                highestFrequency=frequency;
+                element=key;
             }
-            if(FreqMap.get(key)==maxFreq)
+            else if(frequency==highestFrequency)
             {
-                if(key<high)
+                if(key<element)
                 {
-                    high=key;
+                    element=key;
                 }
             }
         }
-        return high;
+        return element;  
     }
 }
 
