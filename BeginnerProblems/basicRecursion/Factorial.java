@@ -21,24 +21,34 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int factorial(int n) 
     {
+        if(n<=1)
+        {
+            return 1;
+        }
+        return n * factorial(n-1); 
+    }
+}
+    
+class Solution2 
+{
+    public long factorial(int n) 
+    {
+        return fact(n);
+    }
+    public long fact(int n)
+    {
+        if(n<=0)
+        {
+            return 1;
+        }
         if(n==1)
         {
             return 1;
         }
-        if(n==0)
-        {
-            return 1;
-        }
-        else
-        {
-            return n*factorial(n-1);
-        }
-
+        return n*fact(n-1);
     }
 }
-    
-

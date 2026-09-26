@@ -3,7 +3,8 @@ package BeginnerProblems.basicRecursion;
 
 /* 
 
-Given an integer N, return the sum of first N natural numbers. Try to solve this using recursion.
+Given an integer N, return the sum of first N natural numbers. 
+Try to solve this using recursion.
 
 Example 1
 Input : N = 4
@@ -17,7 +18,6 @@ Output : 3
 Explanation : first two natural numbers are 1, 2.
 Sum is 1 + 2 => 3.
 
-
 Constraints
 1 <= N <= 103
 
@@ -25,20 +25,31 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int NnumbersSum(int N) 
     {
-        //your code goes here
+        if(N<=0)
+        {
+            return 0;
+        }
+        return N+NnumbersSum(N-1);
+    }
+}
+
+class Solution2 
+{
+    public int NnumbersSum(int N)  
+    {
+        return sum(N);
+    }
+    public int sum(int N)
+    {
         if(N==0)
         {
             return 0;
         }
-        else
-        {
-            return N+NnumbersSum(N-1);
-        }
-       
+        return N+sum(N-1);
     }
 }
     
