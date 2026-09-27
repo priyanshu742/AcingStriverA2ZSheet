@@ -31,7 +31,7 @@ Constraints
 
 */
 
-package BeginnerProblems.ThingsTOKnow;
+package BeginnerProblems.ThingsTOKnow(OLD);
 
 class Solution 
 {
