@@ -25,27 +25,72 @@ Constraints
 EASY
 */
 
-
-
-
-class Solution
+class Solution1
 {
     public int fib(int n) 
     {
-        //your code goes here
-        if(n==1)
-        {
-            return 1;
-        }
+        // recursive
         if(n==0)
         {
             return 0;
         }
-        else
+        if(n==1)
         {
-            return fib(n-1)+fib(n-2);
+            return 1;
         }
+        return fib(n-1)+fib(n-2);
     }
 }
     
+class Solution2
+{
+    public int fib(int n) 
+    {
+        //optimal recursive;
+        int memo[]=new int[n+1];
+        return fibHelper(n,memo);
+    }
+    public int fibHelper(int n,int []memo)
+    {
+        if(n==0)
+        {
+            return 0;
+        }
+        if(n==1)
+        {
+            return 1;
+        }
+        if(memo[n]!=0)
+        {
+            return memo[n];
+        }
+        memo[n]=fibHelper(n-1,memo)+fibHelper(n-2,memo);
+        return memo[n];
+    }
+}
 
+class Solution3 
+{
+    public int fib(int n) 
+    {
+        // iterative
+        if(n==0)
+        {
+            return 0;
+        }
+        if(n==1)
+        {
+            return 1;
+        }
+        int prev2=0;
+        int prev1=1;
+        int current=0;
+        for(int i=2;i<=n;i++)
+        {
+            current=prev2+prev1;
+            prev2=prev1;
+            prev1=current;
+        }
+        return current;
+    }
+}
