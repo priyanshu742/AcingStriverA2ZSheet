@@ -3,7 +3,8 @@ package BeginnerProblems.Patterns;
 
 /* 
 
-Given an integer n. You need to recreate the pattern given below for any value of N. Let's say for N = 5, the pattern should look like as below:
+Given an integer n. You need to recreate the pattern given below for any value of N. 
+Let's say for N = 5, the pattern should look like as below:
 
 *****
 ****
@@ -19,21 +20,35 @@ Constraints
 EASY
 */
 
-
-
-class Solution 
+class Solution1
 {
     public void pattern5(int n) 
     {
+        // optimal
         for(int i=n;i>=1;i--)
         {
             for(int j=1;j<=i;j++)
             {
                 System.out.print("*");
             }
-        System.out.println();
+            System.out.println();
         }
     }
 }
     
+class Solution2
+{
+    public void pattern5(int n) 
+    {
+        // optimal
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i+1;j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
 

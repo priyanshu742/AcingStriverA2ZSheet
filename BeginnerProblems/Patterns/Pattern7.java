@@ -16,28 +16,50 @@ Print the pattern in the function given to you.
 Constraints
 1 <= n <= 100
 
-MEDIUM
+EASY
 */
-
 
 
 class Solution 
 {
     public void pattern7(int n) 
     {
+        //optimal
         for(int i=1;i<=n;i++)
         {
-            for(int s=1 ; s<=n-i ; s++)
+            // for space
+            for(int j=1;j<=n-i;j++)
             {
-                // for space
-                System.out.print(" ");  
+                System.out.print(" ");
             }
-            for(int j=1 ; j<=(2*i)-1 ; j++)
+            // for stars
+            for(int j=1;j<=(2*i-1);j++)
             {
-                // for stars
                 System.out.print("*");
             }
-            System.out.println();  
+            System.out.println();
+        }
+    }
+}
+
+class Solution2
+{
+    public void pattern7(int n) 
+    {
+        //optimal
+        for(int i=0;i<n;i++)
+        {
+            // for space
+            for(int j=0;j<n-i-1;j++)
+            {
+                System.out.print(" ");
+            }
+            // for stars
+            for(int j=0;j<(2*i+1);j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
         }
     }
 }

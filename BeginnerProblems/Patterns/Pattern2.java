@@ -1,9 +1,9 @@
 package BeginnerProblems.Patterns;
 
-
-
 /* 
-Given an integer n. You need to recreate the pattern given below for any value of N. Let's say for N = 5, the pattern should look like as below:
+
+Given an integer n. You need to recreate the pattern given below for any value of N. 
+Let's say for N = 5, the pattern should look like as below:
 
 *
 **
@@ -19,16 +19,30 @@ Constraints
 EASY
 */
 
-
-
-
-class Solution 
+class Solution1
 {
     public void pattern2(int n) 
     {
+        // optimal
         for(int i=1;i<=n;i++)
         {
             for(int j=1;j<=i;j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+class Solution2 
+{
+    public void pattern2(int n) 
+    {
+        for(int i=0;i<n;i++)
+        {
+            // optimal
+            for(int j=0;j<=i;j++)
             {
                 System.out.print("*");
             }
