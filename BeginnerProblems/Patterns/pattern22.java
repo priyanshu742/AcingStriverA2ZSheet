@@ -27,6 +27,10 @@ Input: n = 2
 Output:
 https://static.takeuforward.org/content/1789474161_wHZwjHX3.webp
 
+
+Constraints:
+1 <= n <= 100
+
 MEDIUM
 */
 

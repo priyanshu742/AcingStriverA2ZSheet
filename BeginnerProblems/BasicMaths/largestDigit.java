@@ -2,7 +2,8 @@ package BeginnerProblems.basicMaths;
 
 /* 
 
-You are given an integer n. Return the largest digit present in the number.
+You are given an integer n. 
+Return the largest digit present in the number.
 
 Example 1:
 Input: n = 25
@@ -27,7 +28,6 @@ class Solution
     public int largestDigit(int n) 
     {
         int maxdigit=0;
-        n=Math.abs(n);
         while(n!=0)
         {
             int digit=n%10;

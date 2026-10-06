@@ -3,10 +3,10 @@ package BeginnerProblems.basicMaths;
 
 /*
 
-You are given an integer n. You need to check whether the number is a palindrome number or not. Return true if it's a palindrome number, otherwise return false.
+You are given an integer n. You need to check whether the number is a palindrome number or not. 
+Return true if it's a palindrome number, otherwise return false.
 
 A palindrome number is a number which reads the same both left to right and right to left.
-
 
 Example 1
 Input: n = 121
@@ -25,31 +25,22 @@ Constraints
 0 <= n <= 5000
 n will contain no leading zeroes except when it is 0 itself.
 
+EASY
 */
-
 
 class Solution 
 {
     public boolean isPalindrome(int n) 
     {
+        // optimal
         int check=n;
-        int digit=0;
-        int rev=0;
-
+        int reverse=0;
         while(n!=0)
         {
-            digit=n%10;
-            rev=rev*10 + digit;
+            int digit=n%10;
+            reverse=reverse*10 + digit;
             n=n/10;
         }
-
-        if(rev==check)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return check==reverse;
     }
 }

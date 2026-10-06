@@ -2,8 +2,6 @@ package BeginnerProblems.basicMaths;
 
 /*
 
-
-
 You are given an integer n. You need to find out the number of prime numbers in the range [1, n] (inclusive). 
 Return the number of prime numbers in the range.
 A prime number is a number which has no divisors except, 1 and itself.
@@ -25,7 +23,68 @@ Constraints:
 EASY
 */
 
-class Solution 
+class Solution1 
+{
+    public int primeUptoN(int n) 
+    {
+        // brute
+        if(n==1)
+        {
+            return 0;
+        }
+        int prime=0;
+        for(int i=2;i<=n;i++)
+        {
+            int flag=1;
+            for(int j=2;j<i;j++)
+            {
+                if(i%j==0)
+                {
+                    flag=2;
+                    break;
+                }
+            }
+            if(flag==1)
+            {
+                prime++;
+            }
+        }
+        return prime;
+    }
+}
+
+class Solution2
+{
+    public int primeUptoN(int n) 
+    {
+        // brute
+        if(n==1)
+        {
+            return 0;
+        }
+        int prime=0;
+        for(int i=2;i<=n;i++)
+        {
+            int flag=1;
+            for(int j=2;j*j<=i;j++)
+            {
+                if(i%j==0)
+                {
+                    flag=2;
+                    break;
+                }
+            }
+            if(flag==1)
+            {
+                prime++;
+            }
+        }
+        return prime;
+    }
+}
+
+
+class Solution3
 {
     // optimal
     public int primeUptoN(int n) 

@@ -3,7 +3,9 @@ package BeginnerProblems.basicMaths;
 /*
 
 
-You are given two integers n1 and n2. You need find the Lowest Common Multiple (LCM) of the two given numbers. Return the LCM of the two numbers.
+You are given two integers n1 and n2. 
+You need find the Lowest Common Multiple (LCM) of the two given numbers. 
+Return the LCM of the two numbers.
 
 The Lowest Common Multiple (LCM) of two integers is the lowest positive integer that is divisible by both the integers.
 
@@ -26,7 +28,7 @@ Constraints:
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int LCM(int n1, int n2) 
     {
@@ -57,5 +59,24 @@ class Solution
             return n1;
         }
         return n2;
+    }
+}
+
+class Solution2
+{
+    public int LCM(int n1, int n2) 
+    {
+        int maxNum=Math.max(n1,n2);
+        while(true)
+        {
+            if(maxNum%n1==0 && maxNum%n2==0)
+            {
+                return maxNum;
+            } 
+            else
+            {
+                maxNum++;
+            }   
+        }
     }
 }

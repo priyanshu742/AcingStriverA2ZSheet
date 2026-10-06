@@ -2,7 +2,8 @@ package BeginnerProblems.Patterns;
 
 /*
 
-Given an integer n. You need to recreate the pattern given below for any value of N. Let's say for N = 5, the pattern should look like as below:
+Given an integer n. You need to recreate the pattern given below for any value of N. 
+Let's say for N = 5, the pattern should look like as below:
 
 1 
 2 3 
@@ -12,13 +13,15 @@ Given an integer n. You need to recreate the pattern given below for any value o
 
 Print the pattern in the function given to you.
 
+
 Constraints
 1 <= n <= 100
 
+EASY
 */
 
 
-class Solution 
+class Solution1
 {
     public void pattern13(int n) 
     {
@@ -29,6 +32,23 @@ class Solution
             {
                 System.out.print(count + " ");
                 count= count + 1;
+            }
+            System.out.println();
+        }
+    }
+}
+
+class Solution2
+{
+    public void pattern13(int n) 
+    {
+        int num=1;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print(num +" ");
+                num++;
             }
             System.out.println();
         }

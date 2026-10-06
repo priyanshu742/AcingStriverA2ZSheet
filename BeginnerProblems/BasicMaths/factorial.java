@@ -22,12 +22,25 @@ Constraints:
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int factorial(int n) 
     {
         int fact=1;
         for(int i=n;i>=2;i--)
+        {
+            fact=fact*i;  
+        }
+        return fact;
+    }
+}
+
+class Solution2
+{
+    public int factorial(int n) 
+    {
+        int fact=1;
+        for(int i=2;i<=n;i++)
         {
             fact=fact*i;  
         }

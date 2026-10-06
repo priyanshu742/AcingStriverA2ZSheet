@@ -1,9 +1,10 @@
 package BeginnerProblems.basicMaths;
 
-
 /*
 
-You are given an integer n. You need to check whether it is an armstrong number or not. Return true if it is an armstrong number, otherwise return false.
+You are given an integer n. 
+You need to check whether it is an armstrong number or not. 
+Return true if it is an armstrong number, otherwise return false.
 
 An armstrong number is a number which is equal to the sum of the digits of the number, raised to the power of the number of digits.
 
@@ -13,7 +14,6 @@ Output: true
 Explanation: Number of digits : 3.
 13 + 53 + 33 = 1 + 125 + 27 = 153.
 Therefore, it is an Armstrong number.
-
 
 Example 2
 Input: n = 12
@@ -26,42 +26,61 @@ Therefore, it is not an Armstrong number.Constraints
 Constraints
 0 <= n <= 109
 
+EASY
 */
 
-
-
-class Solution 
+class Solution1
 {
     public boolean isArmstrong(int n) 
     {
         int check=n;
         int pseudo=n;
         int arm=0;
-        int digit=0;
         int totalDigit=0;
 
         while(pseudo!=0)
         {
-            digit=pseudo%10;
             totalDigit++;
             pseudo=pseudo/10;
         }
 
         while(n!=0)
         {
-            digit=n%10;
+            int digit=n%10;
             arm=arm+((int)Math.pow(digit,totalDigit));
             n=n/10;
         }
-        if(arm==check)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return arm==check;
     }
 }
-    
+ 
+class Solution2
+{
+    public boolean isArmstrong(int n) 
+    {
+        // optimal
+        int check=n;
+        int pseudo=n;
+        int arm=0;
+        int totalDigit=0;
 
+        while(pseudo!=0)
+        {
+            totalDigit++;
+            pseudo=pseudo/10;
+        }
+
+        while(n!=0)
+        {
+            int value=1;
+            int digit=n%10;
+            for(int i=1;i<=totalDigit;i++)
+            {
+                value=value*digit;
+            }
+            arm=arm+value;
+            n=n/10;
+        }
+        return arm==check;
+    }
+}

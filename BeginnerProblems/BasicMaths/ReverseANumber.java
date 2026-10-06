@@ -1,12 +1,9 @@
 package BeginnerProblems.basicMaths;
 
-
-
 /*
 
-
-You are given an integer n. Return the integer formed by placing the digits of n in reverse order.
-
+You are given an integer n. 
+Return the integer formed by placing the digits of n in reverse order.
 
 Example 1
 Input: n = 25
@@ -24,24 +21,22 @@ Constraints
 0 <= n <= 5000
 n will contain no leading zeroes except when it is 0 itself.
 
-
+EASY
 */
-
-
 
 class Solution 
 {
     public int reverseNumber(int n) 
     {
-        int rev=0;
-        int d=0;
+        // optimal
+        int reverse=0;
         while(n!=0)
         {
-            d=n%10;
-            rev= rev*10 + d;
+            int digit=n%10;
+            reverse=reverse*10 + digit;
             n=n/10;
         }
-        return rev;
+        return reverse;
     }
 }
     

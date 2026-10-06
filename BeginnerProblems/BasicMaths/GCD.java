@@ -3,10 +3,11 @@ package BeginnerProblems.basicMaths;
 
 /*
 
-You are given two integers n1 and n2. You need find the Greatest Common Divisor (GCD) of the two given numbers. Return the GCD of the two numbers.
+You are given two integers n1 and n2. 
+You need find the Greatest Common Divisor (GCD) of the two given numbers. 
+Return the GCD of the two numbers.
 
 The Greatest Common Divisor (GCD) of two integers is the largest positive integer that divides both of the integers.
-
 
 Example 1
 Input: n1 = 4, n2 = 6
@@ -21,32 +22,64 @@ Explanation: Divisors of n1 = 1, 3, 9 Divisors of n2 = 1, 2, 4, 8.
 Greatest Common divisor = 1.
 
 
-
 Constraints
 1 <= n1, n2 <= 1000
 
+EASY
 */
 
-
-class Solution1 
+class Solution1
 {
     public int GCD(int n1, int n2) 
     {
-        // Brute
-        int gcd=1;
-        for(int i =1 ; i<=Math.min(n1,n2) ;i++)
+        // brute
+        int ans=1;
+        int low=1;
+        if(n1<n2)
+        {
+            low=n1;
+        }
+        else
+        {
+            low=n2;
+        }
+        for(int i=1;i<=low;i++)
         {
             if(n1%i==0 && n2%i==0)
             {
-                gcd=i;
+                ans=i;
             }
         }
-        return gcd;
+        return ans;
     }
 }
 
+class Solution2
+{
+    public int GCD(int n1, int n2) 
+    {
+        // brute
+        int low=1;
+        if(n1<n2)
+        {
+            low=n1;
+        }
+        else
+        {
+            low=n2;
+        }
+        for(int i=low;i>=2;i--)
+        {
+            if(n1%i==0 && n2%i==0)
+            {
+                return i;
+            }
+        }
+        return 1;
+    }
+}
 
-class Solution2 
+class Solution3
 {
     public int GCD(int n1, int n2) 
     {

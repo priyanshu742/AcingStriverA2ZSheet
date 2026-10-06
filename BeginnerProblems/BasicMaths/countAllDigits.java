@@ -25,16 +25,34 @@ n will contain no leading zeroes except when it is 0 itself.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int countDigit(int n) 
-    { 
-        int d=0;
+    {
+        if(n==0)
+        {
+            return 1;
+        }
+        int count=0;
         while(n!=0)
         {
-            d= d+1;
+            count++;
             n=n/10;
         }
-        return d;
+        return count;
+    }
+}
+
+class Solution2 
+{
+    public int countDigit(int n) 
+    {
+        //optimal
+        if(n==0)
+        {
+            return 1;
+        }
+        int count=(int) Math.log10(n)+1 ;
+        return count;
     }
 }

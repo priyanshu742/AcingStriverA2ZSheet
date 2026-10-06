@@ -1,10 +1,9 @@
 package BeginnerProblems.Patterns;
 
-
-
 /*
  
-Given an integer n. You need to recreate the pattern given below for any value of N. Let's say for N = 5, the pattern should look like as below:
+Given an integer n. You need to recreate the pattern given below for any value of N. 
+Let's say for N = 5, the pattern should look like as below:
 
 ABCDE
 ABCD
@@ -14,14 +13,14 @@ A
 
 Print the pattern in the function given to you.
 
+
 Constraints
 1 <= n <= 26
 
+EASY
 */
 
-
-
-class Solution 
+class Solution1
 {
     public void pattern15(int n) 
     {
@@ -36,4 +35,33 @@ class Solution
     }
 }
     
+class Solution2
+{
+    public void pattern15(int n) 
+    {
+        for(int i=n;i>=1;i--)
+        {
+            for(int ch='A';ch<'A'+i;ch++)
+            {
+                System.out.print((char)(ch));
+            }
+            System.out.println();
+        }
+    }
+}
+
+class Solution3
+{
+    public void pattern15(int n) 
+    {
+        for(int i=0;i<n;i++)
+        {
+            for(int ch='A';ch<='A'+(n-i-1);ch++)
+            {
+                System.out.print((char)(ch));
+            }
+            System.out.println();
+        }
+    }
+}
 

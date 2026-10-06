@@ -23,30 +23,85 @@ Constraints
 
 */
 
-class Solution 
+class Solution1
 {
     public boolean isPrime(int n) 
     {
-        //your code goes here
-        int flag=1;
-        for(int i=2 ; i<=n/2 ; i++)
+        if(n==1)
+        {
+            return false;
+        }   
+        for(int i=2;i<=n/2;i++)
         {
             if(n%i==0)
             {
-                flag=0;
-                break;
+                return false;
             }
         }
-        if(flag==1)
-        {
-            return true;
-        }
-        else 
+        return true;
+    }
+}
+
+class Solution2 
+{
+    public boolean isPrime(int n) 
+    {
+        // optimal
+        if(n==1)
         {
             return false;
         }
-
+        for(int i=2;i*i<=n;i++)
+        {
+            if(n%i==0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
-    
+
+class Solution3
+{
+    public boolean isPrime(int n) 
+    {
+        if(n==1)
+        {
+            return false;
+        }   
+        for(int i=2;i<n;i++)
+        {
+            if(n%i==0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Solution4
+{
+    public boolean isPrime(int n) 
+    {
+        int count=0;
+        if(n==1)
+        {
+            return false;
+        }
+        for(int i=1;i*i<=n;i++)
+        {
+            if(n%i==0)
+            {
+                count++;
+                if(n/i!=i)
+                {
+                    count++;
+                }
+            }
+        }
+        return count==2;
+    }
+}
 

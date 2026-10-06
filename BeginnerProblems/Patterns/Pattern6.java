@@ -13,13 +13,12 @@ Let's say for N = 5, the pattern should look like as below:
 
 Print the pattern in the function given to you.
 
+
 Constraints
 1 <= n <= 100
 
 EASY
 */
-
-
 
 class Solution1
 {
