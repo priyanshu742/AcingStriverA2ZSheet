@@ -5,7 +5,6 @@ package BeginnerProblems.basicArrays;
 Given an array arr of n elements. The task is to reverse the given array. 
 The reversal of array should be inplace.
 
-
 Example 1
 Input: n=5, arr = [1,2,3,4,5]
 Output: [5,4,3,2,1]

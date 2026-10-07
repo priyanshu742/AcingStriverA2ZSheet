@@ -38,9 +38,8 @@ class Solution
         {
             dict.put(n,dict.getOrDefault(n,0)+1);
         }
-        for(int key : dict.keySet())
+        for(int frequency : dict.values())
         {
-            int frequency=dict.get(key);
             if(frequency>highestFrequency)
             {
                 highestFrequency=frequency;

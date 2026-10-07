@@ -1,14 +1,11 @@
 package BeginnerProblems.basicHashing;
 import java.util.*;
 
-
-
 /*
 
 Given an array nums of size n which may contain duplicate elements.
 Return a list of pairs where each pair contains a unique element from the array and its frequency in the array.
 You may return the result in any order, but each element must appear exactly once in the output.
-
 
 Example 1
 Input: nums = [1, 2, 2, 1, 3]
@@ -36,12 +33,10 @@ class Solution
     public List<List<Integer>> countFrequencies(int[] nums) 
     {  // Your code goes here
         Map<Integer,Integer> dict=new HashMap<>();
-
         for(int n: nums)
         {
            dict.put(n,dict.getOrDefault(n,0)+1);
         }
-
         List<List<Integer>> result= new ArrayList<>();
         for(int key : dict.keySet())
         {

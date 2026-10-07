@@ -28,22 +28,50 @@ nums[i] may contain duplicate values.
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int[] selectionSort(int[] nums) 
     {
-        int size=nums.length;
-        for(int i=0;i<=size-2;i++)
+        int n=nums.length;
+        for(int i=0;i<=n-2;i++)
         {
             int min=i;
-            for(int j=i+1; j<=size-1;j++)
+            for(int j=i;j<=n-1;j++)
             {
                 if(nums[j]<nums[min])
                 {
-                    int temp=nums[min];
-                    nums[min]=nums[j];
-                    nums[j]=temp;
+                    min=j;
                 }
+            }
+            int temp=nums[i];
+            nums[i]=nums[min];
+            nums[min]=temp;
+        }
+        return nums;
+    }
+}
+
+class Solution2 
+{
+    public int[] selectionSort(int[] nums) 
+    {
+        // fully optimal;
+        int n=nums.length;
+        for(int i=0;i<=n-2;i++)
+        {
+            int min=i;
+            for(int j=i+1;j<=n-1;j++)
+            {
+                if(nums[j]<nums[min])
+                {
+                    min=j;
+                }
+            }
+            if(min!=i)
+            {
+                int temp=nums[i];
+                nums[i]=nums[min];
+                nums[min]=temp;
             }
         }
         return nums;

@@ -28,23 +28,48 @@ nums[i] may contain duplicate values.
 EASY
 */
 
-
-class Solution 
+class Solution1 
 {
     public int[] bubbleSort(int[] nums) 
     {
-        int size=nums.length;
-
-        for(int i=size-1;i>=1;i--)
+        int n=nums.length;
+        for(int i=n-1;i>=1;i--)
         {
-            for(int j=0 ; j<=i-1;j++)
+            for(int j=0;j<=i-1;j++)
             {
-                if(nums[j+1]<nums[j])
+                if(nums[j]>nums[j+1])
                 {
                     int temp=nums[j];
                     nums[j]=nums[j+1];
                     nums[j+1]=temp;
                 }
+            }
+        }
+        return nums;
+    }
+}
+
+class Solution2 
+{
+    public int[] bubbleSort(int[] nums) 
+    {
+        int n=nums.length;
+        for(int i=n-1;i>=1;i--)
+        {
+            int didSwap=0;
+            for(int j=0;j<=i-1;j++)
+            {
+                if(nums[j]>nums[j+1])
+                {
+                    int temp=nums[j];
+                    nums[j]=nums[j+1];
+                    nums[j+1]=temp;
+                    didSwap=1;
+                }
+            }
+            if(didSwap==0)
+            {
+                break;
             }
         }
         return nums;

@@ -2,7 +2,8 @@ package BeginnerProblems.basicArrays;
 
 /*
 
-Given an array of n elements. The task is to return the count of the number of odd numbers in the array.
+Given an array of n elements. 
+The task is to return the count of the number of odd numbers in the array.
 
 Example 1:
 Input: n=5, array = [1,2,3,4,5]

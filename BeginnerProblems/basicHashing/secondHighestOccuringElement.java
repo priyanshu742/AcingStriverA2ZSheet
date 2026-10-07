@@ -77,10 +77,6 @@ class Solution
                 }
             }
         }
-        if(secondHighestFrequency==0)
-        {
-            return -1;
-        }
         return secondFrequentElement;
     }
 }

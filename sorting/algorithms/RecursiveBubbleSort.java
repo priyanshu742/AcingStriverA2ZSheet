@@ -29,41 +29,61 @@ nums[i] may contain duplicate values.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int[] bubbleSort(int[] nums) 
     {
-        int size=nums.length;
-
-        return RecursiveSort(nums,size);
-    }
-
-    public int[] RecursiveSort(int arr[],int size)
+        return recursiveBubble(nums,nums.length-1);
+    } 
+    public int [] recursiveBubble(int nums[],int n)
     {
-        int j=size;
-        if(size<=1)
+        if(n<1)
         {
-            return arr;
+            return nums;
         }
-        else
+        for(int i=0;i<=n-1;i++)
         {
-            for(int i=0;i<j-1;i++)
+            if(nums[i]>nums[i+1])
             {
-                if (arr[i+1]<arr[i])
-                {
-                    int temp=arr[i];
-                    arr[i]=arr[i+1];
-                    arr[i+1]=temp;
-                }
+                int temp=nums[i];
+                nums[i]=nums[i+1];
+                nums[i+1]=temp;
             }
-            return RecursiveSort(arr,size-1);
         }
+        return recursiveBubble(nums,n-1);
     }
 }
 
-
-
-
+class Solution2 
+{
+    public int[] bubbleSort(int[] nums) 
+    {
+        return recursiveBubble(nums,nums.length-1);
+    } 
+    public int [] recursiveBubble(int nums[],int n)
+    {
+        if(n<1)
+        {
+            return nums;
+        }
+        int didSwap=0;
+        for(int i=0;i<=n-1;i++)
+        {
+            if(nums[i]>nums[i+1])
+            {
+                int temp=nums[i];
+                nums[i]=nums[i+1];
+                nums[i+1]=temp;
+                didSwap=1;
+            }
+        }
+        if(didSwap==0)
+        {
+            return nums;
+        }
+        return recursiveBubble(nums,n-1);
+    }
+}
 
 
 

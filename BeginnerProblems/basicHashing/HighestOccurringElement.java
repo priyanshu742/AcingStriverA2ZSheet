@@ -3,8 +3,6 @@ package BeginnerProblems.basicHashing;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 /*
 
 Given an array nums of n integers, find the most frequent element in it i.e., the element that occurs the maximum number of times.
@@ -35,7 +33,7 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int mostFrequentElement(int[] nums) 
     {
@@ -66,4 +64,30 @@ class Solution
     }
 }
 
-
+class Solution2
+{
+    public int mostFrequentElement(int[] nums) 
+    {
+        int highestFrequency=0;
+        int element=0;
+        Map<Integer,Integer> dict=new HashMap<>();
+        for(int n: nums)
+        {
+            dict.put(n,dict.getOrDefault(n,0)+1);
+            int frequency=dict.get(n);
+            if(frequency>highestFrequency)
+            {
+                highestFrequency=frequency;
+                element=n;
+            }
+            else if(frequency==highestFrequency)
+            {
+                if(n<element)
+                {
+                    element=n;
+                }
+            }
+        }
+        return element;
+    }
+}
