@@ -24,7 +24,7 @@ Constraints:
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public boolean checkPrime(int num) 
     {
@@ -41,6 +41,34 @@ class Solution
     public boolean check(int i,int num) 
     {
         if(i*i>num)
+        {
+            return true;
+        }
+        if(num%i==0)
+        {
+            return false;
+        }
+        return check(i+1,num);
+    }
+}
+
+class Solution2
+{
+    public boolean checkPrime(int num) 
+    {
+        if(num<=1)
+        {
+            return false;
+        }
+        if(num==2)
+        {
+            return true;
+        }
+        return check(2,num);
+    }
+    public boolean check(int i,int num) 
+    {
+        if(i>=num)
         {
             return true;
         }

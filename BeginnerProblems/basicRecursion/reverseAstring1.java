@@ -30,7 +30,6 @@ class Solution
     {
         int low=0;
         int high=s.size()-1;
-       
         return swap(s,low,high);
     }
 

@@ -1,6 +1,5 @@
 package sorting.algorithms;
 
-
 /*
 
 Given an array of integers nums, sort the array in non-decreasing order using the recursive Insertion Sort algorithm, and return the sorted array.
@@ -29,37 +28,55 @@ nums[i] may contain duplicate values.
 EASY
 */
 
+class Solution1
+{
+    public int[] insertionSort(int[] nums) 
+    {
+        return recursiveInserion(nums,1);
 
-class Solution 
+    }
+    public int[] recursiveInserion(int nums[],int index)
+    {
+        if(index>=nums.length)
+        {
+            return nums;
+        }
+        int j=index;
+        while(j>0 && nums[j-1]>nums[j])
+        {
+            int temp=nums[j];
+            nums[j]=nums[j-1];
+            nums[j-1]=temp;
+            j--;
+        }
+        return recursiveInserion(nums,index+1);
+    }
+}
+
+class Solution2
 {
     public int[] insertionSort(int[] nums) 
     {
         return Sort(nums,1);
     }
-
-    public int[] Sort(int arr[],int size)
+    public int[] Sort(int nums[],int index)
     {
-        int maxsize=arr.length-1;
-        int j=size;
-
-        if(size>maxsize)
+        if(index>=nums.length)
         {
-            return arr;
+            return nums;
         }
-
-        RecursiveSort(arr,j);
-        
-        return Sort(arr,size+1);
+        int j=index;
+        RecursiveSort(nums,j);
+        return Sort(nums,j+1);
     }
-
-    public void RecursiveSort(int arr[],int j)
+    public void RecursiveSort(int nums[],int j)
     {
-        if(j>0 && arr[j]<arr[j-1])
+        if(j>0 && nums[j-1]>nums[j])
         { 
-            int temp=arr[j];
-            arr[j]=arr[j-1];
-            arr[j-1]=temp;
-            RecursiveSort(arr,j-1);
+            int temp=nums[j];
+            nums[j]=nums[j-1];
+            nums[j-1]=temp;
+            RecursiveSort(nums,j-1);
         }
     }
 }

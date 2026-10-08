@@ -18,6 +18,7 @@ Output : 3
 Explanation : first two natural numbers are 1, 2.
 Sum is 1 + 2 => 3.
 
+
 Constraints
 1 <= N <= 103
 

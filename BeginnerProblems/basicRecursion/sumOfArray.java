@@ -1,20 +1,40 @@
 package BeginnerProblems.basicRecursion;
 
+/*
 
-class Solution1 
+Given an array nums, find the sum of elements of array using recursion.
+
+Example 1:
+Input : nums = [1, 2, 3]
+Output : 6
+Explanation : The sum of elements of array is 1 + 2 + 3 => 6.
+
+Example 2:
+Input : nums = [5, 8, 1]
+Output : 14
+Explanation : The sum of elements of array is 5 + 8 + 1 => 14.
+
+
+Constraints:
+1 <= n <= 100
+0 <= nums[i] <= 100
+
+EASY
+*/
+
+class Solution 
 {
     public int arraySum(int[] nums) 
     {
-        int size=nums.length-1;
-        return sum(nums,size,0);
+        return sum(nums,0);
     }
-    public int sum(int nums[],int size,int i)
+    public int sum(int nums[],int i)
     {
-        if(i>size)
+        if(i>=nums.length)
         {
             return 0;
         }
-        return nums[i]+sum(nums,size,i+1);
+        return nums[i]+sum(nums,i+1);
     }
 }
 

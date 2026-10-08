@@ -1,7 +1,5 @@
 package BeginnerProblems.basicRecursion;
 
-
-
 /*
 
 Given a string s, return true if the string is palindrome, otherwise false.

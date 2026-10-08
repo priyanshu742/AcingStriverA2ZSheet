@@ -21,7 +21,7 @@ Now single digit is remaining , so we return it.
 Constraints:
 0 <= num <= 231 - 1
 
-EASY
+TRICKY
 */
 
 class Solution1
