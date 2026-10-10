@@ -32,6 +32,7 @@ class Solution1
 {
     public void reverseString(List<Character> s) 
     {
+        // optimal (A)
         int low=0;
         int high=s.size()-1;
         while(low<high)
@@ -49,6 +50,7 @@ class Solution2
 {
     public void reverseString(List<Character> s) 
     {
+        // optimal (B)
         int n=s.size();
         for(int i=0;i<n/2;i++)
         {

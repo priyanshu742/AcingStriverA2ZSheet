@@ -1,6 +1,5 @@
 package BeginnerProblems.basicStrings;
 
-
 /*
 
 Write a function to find the longest common prefix string amongst an array of strings.
@@ -67,11 +66,7 @@ class Solution2
         {
             while(!str[i].startsWith(prefix))
             {
-                prefix=prefix.substring(0,prefix.length()-1);
-                if(prefix.isEmpty())
-                {
-                    return "";
-                }
+                prefix=prefix.substring(0,prefix.length()-1);  
             }
         }
         return prefix;
@@ -126,3 +121,27 @@ class Solution3
     } 
 }
 
+class Solution 
+{    
+    public String longestCommonPrefix(String[] str) 
+    {
+        // optimal
+        if(str==null || str.length==0)
+        {
+            return "";
+        }
+        String first=str[0];
+        for(int i=0;i<first.length();i++)
+        {
+            char ch=first.charAt(i);
+            for(int j=1;j<str.length;j++)
+            {
+                if(i==str[j].length() || str[j].charAt(i)!=ch)
+                {
+                    return first.substring(0,i);
+                }
+            }
+        }
+        return first;    
+    }
+}

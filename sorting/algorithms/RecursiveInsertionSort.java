@@ -32,10 +32,9 @@ class Solution1
 {
     public int[] insertionSort(int[] nums) 
     {
-        return recursiveInserion(nums,1);
-
+        return recursiveInsertion(nums,1);
     }
-    public int[] recursiveInserion(int nums[],int index)
+    public int[] recursiveInsertion(int nums[],int index)
     {
         if(index>=nums.length)
         {
@@ -49,7 +48,7 @@ class Solution1
             nums[j-1]=temp;
             j--;
         }
-        return recursiveInserion(nums,index+1);
+        return recursiveInsertion(nums,index+1);
     }
 }
 

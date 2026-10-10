@@ -1,9 +1,5 @@
 package sorting.algorithms;
 
-
-
-
-
 /*
 
 Given an array of integers called nums, sort the array in non-decreasing order using the insertion sort algorithm and return the sorted array.
@@ -29,7 +25,6 @@ nums[i] may contain duplicate values.
 
 EASY
 */
-
 
 class Solution 
 {

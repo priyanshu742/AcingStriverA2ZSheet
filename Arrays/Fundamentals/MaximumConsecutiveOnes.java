@@ -29,25 +29,25 @@ class Solution
 {
     public int findMaxConsecutiveOnes(int[] nums) 
     {
-        int maxOnes=0;
-        int currentOnes=0;
-
-        for(int i=0;i<nums.length-1;i++)
+        // optimal
+        int count=0;
+        int maximum=0;
+        for(int i=0;i<nums.length;i++)
         {
             if(nums[i]==1)
             {
-                currentOnes++;
-                if(currentOnes>maxOnes)
+                count++;
+                if(count>maximum)
                 {
-                    maxOnes=currentOnes;
+                    maximum=count;
                 }
             }
             else
             {
-                currentOnes=0;
+                count=0;
             }
         }
-        return maxOnes;
+        return maximum;   
     }
 }
 

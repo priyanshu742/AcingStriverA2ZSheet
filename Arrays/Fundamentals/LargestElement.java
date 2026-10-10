@@ -24,21 +24,78 @@ nums may contain duplicate elements.
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int largestElement(int[] nums) 
     {
-        int large=nums[0];
-        for(int i=0;i<nums.length;i++)
+        // optimal
+        int largest=nums[0];
+        for(int i=1;i<nums.length;i++)
         {
-            if(nums[i]>large)
+            if(nums[i]>largest)
             {
-                large=nums[i];
+                largest=nums[i];
             }
         }
-        return large;
+        return largest;
     }
 }
-
     
-
+class Solution2
+{
+    public int largestElement(int[] nums) 
+    {
+        // brute
+        divide(nums,0,nums.length-1);
+        return nums[nums.length-1];
+    }
+    public void divide(int nums[],int low,int high)
+    {
+        if(low>=high)
+        {
+            return ;
+        }
+        int mid=low+(high-low)/2;
+        divide(nums,low,mid);
+        divide(nums,mid+1,high);
+        merge(nums,low,mid,high);
+    }
+    public void merge(int nums[],int low,int mid,int high)
+    {
+        int temp[]=new int[high-low+1];
+        int index=0;
+        int left=low;
+        int right=mid+1;
+        while(left<=mid && right<=high)
+        {
+            if(nums[left]<=nums[right])
+            {
+                temp[index]=nums[left];
+                left++;
+                index++;
+            }
+            else
+            {
+                temp[index]=nums[right];
+                right++;
+                index++;
+            }
+        }
+        while(left<=mid)
+        {
+            temp[index]=nums[left];
+            left++;
+            index++;
+        }
+        while(right<=high)
+        {
+            temp[index]=nums[right];
+            right++;
+            index++;
+        }
+        for(int i=low;i<=high;i++)
+        {
+            nums[i]=temp[i-low];
+        }
+    }
+}

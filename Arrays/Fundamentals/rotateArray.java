@@ -33,21 +33,96 @@ Constraints
 EASY
 */
 
-
-class Solution 
+class Solution1
 {
-    public void rotateArray(int[] nums, int k)
+    public void rotateArray(int[] nums, int k) 
     {
-        int size=nums.length;
-        k=k%size;
-        for(int j=1;j<=k;j++)
+        // brute (A)
+        k=k%nums.length;
+        while(k!=0)
         {
             int first=nums[0];
-            for(int i=0;i<size-1;i++)
+            for(int i=0;i<nums.length-1;i++)
             {
                 nums[i]=nums[i+1];
             }
-            nums[size-1]=first;
+            nums[nums.length-1]=first;
+            k--;
+        }
+    }
+}
+
+class Solution2 
+{
+    public void rotateArray(int[] nums, int k) 
+    {
+        // brute (B)
+        k=k%nums.length;
+        for(int i=1;i<=k;i++)
+        {
+            int first=nums[0];
+            for(int j=0;j<nums.length-1;j++)
+            {
+                nums[j]=nums[j+1];
+            }
+            nums[nums.length-1]=first;
+        }
+    }
+}
+
+class Solution 
+{
+    public void rotateArray(int[] nums, int k) 
+    {
+        // better
+        int n=nums.length;
+        k=k%n;
+        int temp[]=new int[k];
+        // 1. copy
+        for(int i=0;i<k;i++)
+        {
+            temp[i]=nums[i];
+        }
+        // 2. shift
+        for(int i=k;i<n;i++)
+        {
+            nums[i-k]=nums[i];
+        }
+        // 3. push back
+        for(int i=n-k;i<n;i++)
+        {
+            // int j=0;
+            // nums[i]=temp[j];
+            // j++;
+            nums[i]=temp[i-(n-k)];
+        }
+        
+    }
+}
+
+class Solution4
+{
+    public void rotateArray(int[] nums, int k) 
+    {
+        // optimal
+        int n=nums.length;
+        k=k%nums.length;
+        // reverses the first k elements
+        reverse(nums,0,k-1);
+        // reverses the remaining elements
+        reverse(nums,k,n-1);
+        // reverses the entire array
+        reverse(nums,0,n-1); 
+    }
+    public void reverse(int nums[],int low,int high)
+    {
+        while(low<=high)
+        {
+            int temp=nums[low];
+            nums[low]=nums[high];
+            nums[high]=temp;
+            low++;
+            high--;
         }
     }
 }

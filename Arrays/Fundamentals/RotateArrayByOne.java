@@ -6,7 +6,6 @@ package Arrays.Fundamentals;
 Given an integer array nums, rotate the array to the left by one.
 Note: There is no need to return anything, just modify the given array.
 
-
 Example 1
 Input: nums = [1, 2, 3, 4, 5]
 Output: [2, 3, 4, 5, 1]
@@ -29,15 +28,32 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1
 {
-    public void rotateArrayByOne(int[] nums)
+    public void rotateArrayByOne(int[] nums) 
     {
+        // optimal (A)
         int first=nums[0];
         for(int i=0;i<nums.length-1;i++)
         {
             nums[i]=nums[i+1];
         }
         nums[nums.length-1]=first;
+        
+    }
+}
+
+class Solution2
+{
+    public void rotateArrayByOne(int[] nums) 
+    {
+        // optimal (B)
+        int first=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+            nums[i-1]=nums[i];
+        }
+        nums[nums.length-1]=first;
+        
     }
 }

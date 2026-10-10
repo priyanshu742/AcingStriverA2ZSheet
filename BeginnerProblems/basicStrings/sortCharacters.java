@@ -43,6 +43,7 @@ class Solution
 {    
     public List<Character> frequencySort(String s) 
     {
+        //optimal
         // bucket Sort
         List<Character> result=new ArrayList<>();
         List<Character> bucket[]=new ArrayList[s.length()+1];

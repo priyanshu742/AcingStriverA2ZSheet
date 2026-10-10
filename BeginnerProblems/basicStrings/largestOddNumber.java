@@ -36,6 +36,7 @@ class Solution
 {    
     public String largeOddNum(String s) 
     {
+        // optimal
         // substring is required here
         for(int i=s.length()-1;i>=0;i--)
         {
