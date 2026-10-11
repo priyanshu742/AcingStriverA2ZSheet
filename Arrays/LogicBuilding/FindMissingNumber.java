@@ -1,9 +1,9 @@
 package Arrays.LogicBuilding;
 
-
 /*
 
-Given an integer array of size n containing distinct values in the range from 0 to n (inclusive), return the only number missing from the array within this range.
+Given an integer array of size n containing distinct values in the range from 0 to n (inclusive), 
+return the only number missing from the array within this range.
 
 Example 1
 Input: nums = [0, 2, 3, 1, 4]
@@ -27,22 +27,80 @@ All the numbers of nums are unique.
 EASY
 */
 
-
-class Solution 
+class Solution1 
 {
     public int missingNumber(int[] nums) 
     {
-        int size=nums.length;
-
-        int expectedSum=(size*(size+1))/2;
-
-        int actualSum=0;
-        for(int n:nums)
-        {
-            actualSum=actualSum+n;
-        }
-        return expectedSum-actualSum;
+        // brute
+       for(int i=0;i<=nums.length;i++)
+       {
+            int flag=0;
+            for(int j=0;j<nums.length;j++)
+            {
+                if(nums[j]==i)
+                {
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==0)
+            {
+                return i;
+            }
+       } 
+        return -1;
     }
 }
-    
 
+class Solution2 
+{
+    public int missingNumber(int[] nums) 
+    {
+        // better
+        int hash[]=new int[nums.length+1];
+        for(int i=0;i<nums.length;i++)
+        {
+            hash[nums[i]]++;
+        }
+        for(int i=0;i<hash.length;i++)
+        {
+            if(hash[i]==0)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+class Solution3 
+{
+    public int missingNumber(int[] nums) 
+    {
+        // optimal (A)
+        int n=nums.length;
+        int expectedSum=n*(n+1)/2;
+        int actualSum=0;
+        for(int ele : nums)
+        {
+            actualSum+=ele;
+        }
+        return expectedSum-actualSum; 
+    }
+}
+
+class Solution4
+{
+    public int missingNumber(int[] nums) 
+    {
+        // optimal (B)
+        int xor1=0;
+        int xor2=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++)
+        {
+            xor2=xor2^nums[i];
+            xor1=xor1^(i+1);
+        }
+        return xor1^xor2;  
+    }
+}

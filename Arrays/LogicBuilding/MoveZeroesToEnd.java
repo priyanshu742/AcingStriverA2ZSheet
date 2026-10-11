@@ -1,9 +1,12 @@
 package Arrays.LogicBuilding;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 
-Given an integer array nums, move all the 0's to the end of the array. The relative order of the other elements must remain the same.
+Given an integer array nums, move all the 0's to the end of the array. 
+The relative order of the other elements must remain the same.
 This must be done in place, without making a copy of the array.
 
 Example 1
@@ -26,34 +29,82 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public void moveZeroes(int[] nums) 
     {
-        // OPTIMAL SOLUTION
-        int j=-1;
-        for(int k=0;k<nums.length;k++)
+        // brute
+        List<Integer> temp=new ArrayList<>();
+        for(int n : nums)
         {
-            if(nums[k]==0)
+            if(n!=0)
             {
-                j=k;
+                temp.add(n);
+            }
+        }
+        for(int i=0;i<temp.size();i++)
+        {
+            nums[i]=temp.get(i);
+        }
+        for(int i=temp.size();i<nums.length;i++)
+        {
+            nums[i]=0;
+        }
+    }
+}
+
+class Solution2
+{
+    public void moveZeroes(int[] nums) 
+    {
+        // slightly optimal
+        int index=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]!=0)
+            {
+                nums[index]=nums[i];
+                index++;
+            }
+        }
+        for(int i=index;i<nums.length;i++)
+        {
+            nums[i]=0;
+        }
+    }
+}
+
+class Solution3
+{
+    public void moveZeroes(int[] nums) 
+    {
+        // optimal
+        int j=-1;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==0)
+            {
+                j=i; 
                 break;
             }
         }
         if(j==-1)
         {
-            return;
+            return ;
         }
-
         for(int i=j+1;i<nums.length;i++)
         {
             if(nums[i]!=0)
             {
-                int temp=nums[j];
-                nums[j]=nums[i];
-                nums[i]=temp;
+                swap(nums,i,j);
                 j++;
             }
         }
     }
+    public void swap(int[] nums,int left,int right)
+    {
+        int temp=nums[left];
+        nums[left]=nums[right];
+        nums[right]=temp;
+    } 
 }

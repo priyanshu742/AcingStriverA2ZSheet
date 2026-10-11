@@ -1,7 +1,11 @@
-package Arrays.Easy;
+package Arrays.LogicBuilding;
+
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /* 
-CONFUSING QUESTION
 
 Given an integer array nums sorted in non-decreasing order, remove all duplicates in-place so that each unique element appears only once.
 Return the number of unique elements in the array.
@@ -38,20 +42,60 @@ nums is sorted in non-decreasing order.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
-    public int removeDuplicates(int[] nums) {
-        int uniquecount=1;
-
-        for(int i=1;i<nums.length;i++)
+    public int removeDuplicates(int[] nums) 
+    {
+        // brute (A)
+        Map<Integer,Integer> dict=new LinkedHashMap<>();
+        for(int n : nums)
         {
-            if(nums[i]!=nums[i-1])
-            {
-                nums[uniquecount]=nums[i];
-                uniquecount++;
-            }
+            dict.put(n,dict.getOrDefault(n,0)+1);
         }
-        return uniquecount;
+        int index=0;
+        for(int n: dict.keySet())
+        {
+            nums[index]=n;
+            index++;
+        }
+        return index; 
+    }
+} 
+
+class Solution2
+{
+    public int removeDuplicates(int[] nums) 
+    {
+        // brute (B)
+        Set<Integer> unique=new LinkedHashSet<>();
+        for(int n : nums)
+        {
+            unique.add(n);
+        }
+        int index=0;
+        for(int n: unique)
+        {
+            nums[index]=n;
+            index++;
+        }
+        return index; 
     }
 }
-    
+
+class Solution3
+{
+    public int removeDuplicates(int[] nums) 
+    {
+        // optimal
+        int i=0;
+        for(int j=1;j<nums.length;j++)
+        {
+            if(nums[i]!=nums[j])
+            {
+                nums[i+1]=nums[j];
+                i++;
+            }
+        }
+        return i+1; 
+    }
+}
