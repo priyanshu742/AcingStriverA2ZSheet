@@ -1,5 +1,8 @@
 package Arrays.LogicBuilding;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 /* 
@@ -27,32 +30,180 @@ Both nums1 and nums2 are sorted in non-decreasing order
 EASY
 */
 
-
-class Solution 
+class Solution1 
 {
     public int[] unionArray(int[] nums1, int[] nums2) 
     {
-        TreeSet<Integer> set=new TreeSet<>();
-
+        // brute
+        Set<Integer> unique=new TreeSet<>();
         for(int n:nums1)
         {
-            set.add(n);
+            unique.add(n);
         }
-        
         for(int n:nums2)
         {
-            set.add(n);
+            unique.add(n);
         }
-
-        int result[]=new int[set.size()];
+        int union[]=new int[unique.size()];
         int index=0;
-
-        for(int n:set)
+        for(int n: unique)
         {
-            result[index]=n;
+            union[index]=n;
             index++;
         }
+        return union;   
+    }
+}
 
-        return result;
+class Solution2
+{
+    public int[] unionArray(int[] nums1, int[] nums2) 
+    {
+        // optimal (A)
+        List<Integer> temp=new ArrayList<>();
+        int n1=nums1.length;
+        int n2=nums2.length;
+        int i=0;
+        int j=0;
+        while(i<n1 && j<n2)
+        {
+            if(nums1[i]<=nums2[j])
+            {
+                if(temp.size()==0 || temp.get(temp.size()-1)!=nums1[i])
+                {
+                    temp.add(nums1[i]);
+                }
+                i++;
+            }
+            else
+            {
+                if(temp.size()==0 || temp.get(temp.size()-1)!=nums2[j])
+                {
+                    temp.add(nums2[j]);
+                }
+                j++;
+            }
+        }
+        while(i<n1)
+        {
+            if(temp.size()==0 || temp.get(temp.size()-1)!=nums1[i])
+            {
+                temp.add(nums1[i]);
+            }
+            i++;
+        }
+        while(j<n2)
+        {
+            if(temp.size()==0 || temp.get(temp.size()-1)!=nums2[j])    
+            {
+                temp.add(nums2[j]);
+            }
+            j++;
+        }
+        int []result=new int[temp.size()];
+        for(int k=0;k<temp.size();k++)
+        {
+            result[k]=temp.get(k);
+        }
+        return result; 
+    }
+}
+
+class Solution3
+{
+    public int[] unionArray(int[] nums1, int[] nums2) 
+    {
+        // optimal (B)
+        int count=0;
+        int lastAdded=Integer.MIN_VALUE;
+        int n1=nums1.length;
+        int n2=nums2.length;
+        int i=0;
+        int j=0;
+        // counting unique elements
+        while(i<n1 && j< n2)
+        {
+            if(nums1[i]<=nums2[j])
+            {
+                if(count==0 || lastAdded!=nums1[i])
+                {   
+                    lastAdded=nums1[i];
+                    count++;
+                }
+                i++;
+            }
+            else
+            {
+                if(count==0 || lastAdded!=nums2[j])
+                {
+                    lastAdded=nums2[j];
+                    count++;
+                }
+                j++;
+            }
+        }
+        while(i<n1)
+        {
+            if(count==0 || lastAdded!=nums1[i])
+            {
+                lastAdded=nums1[i];
+                count++;
+            }
+            i++;
+        }
+        while(j<n2)
+        {
+            if(count==0 || lastAdded!=nums2[j])    
+            {
+                lastAdded=nums2[j];
+                count++;
+            }
+            j++;
+        }
+        
+        int result[]=new int[count];
+        int index=0;
+        i=0;
+        j=0;
+        while(i<n1 && j<n2)
+        {
+            if(nums1[i]<=nums2[j])
+            {
+                if(index==0 || result[index-1]!=nums1[i])
+                {
+                   result[index]=nums1[i];
+                   index++;
+                }
+                i++;
+            }
+            else
+            {
+                if(index==0 || result[index-1]!=nums2[j])
+                {
+                    result[index]=nums2[j];
+                    index++;
+                }
+                j++;
+            }
+        }
+        while(i<n1)
+        {
+            if(index==0 || result[index-1]!=nums1[i])
+            {
+                result[index]=nums1[i];
+                index++;
+            }
+            i++;
+        }
+        while(j<n2)
+        {
+            if(index==0 || result[index-1]!=nums2[j])    
+            {
+                result[index]=nums2[j];
+                index++;
+            }
+            j++;
+        }
+        return result; 
     }
 }
