@@ -36,6 +36,7 @@ Both nums1 and nums2 are sorted in non-decreasing order.
 
 EASY
 */
+
 class Solution1
 {
     public int[] intersectionArray(int[] nums1, int[] nums2) 
