@@ -1,8 +1,8 @@
-package Arrays.Hard;
 
 /*
 
-Given two integers r and c, return the value at the rth row and cth column (1-indexed) in a Pascal's Triangle.
+Given two integers r and c, 
+return the value at the rth row and cth column (1-indexed) in a Pascal's Triangle.
 
 In Pascal's triangle:
 The first row contains a single element 1.
@@ -18,12 +18,13 @@ Input: r = 4, c = 2
 Output: 3
 Explanation:
 The Pascal's Triangle is as follows:
+
 1
 1 1
 1 2 1
 1 3 3 1
-
 ....
+
 Thus, value at row 4 and column 2 = 3
 
 Example 2
@@ -37,9 +38,10 @@ The Pascal's Triangle is as follows:
 1 2 1
 1 3 3 1
 1 4 6 4 1
-
 ....
+
 Thus, value at row 5 and column 3 = 6
+
 
 Constraints
 1 <= r, c <= 30
@@ -53,16 +55,16 @@ class Solution
 {
     public int pascalTriangleI(int r, int c) 
     {
-        int n=r-1;
-        int k=c-1;
-
-        int result=1;
-
-        for(int i=0;i<k;i++)
+        // optimal
+        // here nCr = rCc;
+        r=r-1;
+        c=c-1;
+        int res=1;
+        for(int i=0;i<c;i++)
         {
-            result=result*(n-i);
-            result=result/(i+1);
+            res=res*(r-i);
+            res=res/(i+1);
         }
-        return result;
+        return res;
     }
 }
