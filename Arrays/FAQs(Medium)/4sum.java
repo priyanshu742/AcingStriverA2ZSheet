@@ -1,7 +1,8 @@
-package ArrayProblems.Hard;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,13 +38,78 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1
+{
+    public List<List<Integer>> fourSum(int[] nums, int target) 
+    {
+        // brute
+        Set<List<Integer>> result=new HashSet<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            for(int j=i+1;j<nums.length;j++)
+            {
+                for(int k=j+1;k<nums.length;k++)
+                {
+                    for(int l=k+1;l<nums.length;l++)
+                    {
+                        int sum=nums[i]+nums[j]+nums[k]+nums[l];
+                        if(sum==target)
+                        {
+                            List<Integer> temp=new ArrayList<>();
+                            temp.add(nums[i]);
+                            temp.add(nums[j]);
+                            temp.add(nums[k]);
+                            temp.add(nums[l]);
+                            Collections.sort(temp);
+                            result.add(temp);
+                        }
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
+}
+
+class Solution2
+{
+    public List<List<Integer>> fourSum(int[] nums, int target) 
+    {
+        // better
+        Set<List<Integer>> result=new HashSet<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            for(int j=i+1;j<nums.length;j++)
+            {
+                Set<Integer> hash=new HashSet<>();
+                for(int k=j+1;k<nums.length;k++)
+                {
+                    int fourth=target-(nums[i]+nums[j]+nums[k]);
+                    if(hash.contains(fourth))
+                    {
+                        List<Integer> temp=new ArrayList<>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                        temp.add(fourth);
+                        Collections.sort(temp);
+                        result.add(temp);
+                    }
+                    hash.add(nums[k]);
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
+}
+
+class Solution3
 {
     public List<List<Integer>> fourSum(int[] nums, int target) 
     {
         // optimal
         Arrays.sort(nums);
-        Set<List<Integer>> result=new HashSet<>();
+        List<List<Integer>> result=new ArrayList<>();
         for(int i=0;i<nums.length;i++)
         {
             if(i>0 && nums[i]==nums[i-1])
@@ -56,37 +122,41 @@ class Solution
                 {
                     continue;
                 }
-                int k=j+1;
-                int l=nums.length-1;
-                while(k<l)
+                int low=j+1;
+                int high=nums.length-1;
+                while(low<high)
                 {
-                    long sum=(long)nums[i]+nums[j]+nums[k]+nums[l];
+                    int sum=nums[i]+nums[j]+nums[low]+nums[high];
                     if(sum<target)
                     {
-                        k++;
+                        low++;
                     }
                     else if(sum>target)
                     {
-                        l--;
+                        high--;
                     }
                     else
                     {
-                        List<Integer> ans=Arrays.asList(nums[i],nums[j],nums[k],nums[l]);
-                        result.add(ans);
-                        k++;
-                        l--;
-                        while(k<l && nums[k]==nums[k-1])
+                        List<Integer> temp=new ArrayList<>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[low]);
+                        temp.add(nums[high]);
+                        result.add(temp);
+                        low++;
+                        high--;
+                        while(low<high && nums[low]==nums[low-1])
                         {
-                            k++;
+                            low++;
                         }
-                        while(k<l && nums[l]==nums[l+1])
+                        while(low<high && nums[high]==nums[high+1])
                         {
-                            l--;
+                            high--;
                         }
                     }
                 }
-            }
+            } 
         }
-        return new ArrayList<>(result);
+        return result;
     }
 }

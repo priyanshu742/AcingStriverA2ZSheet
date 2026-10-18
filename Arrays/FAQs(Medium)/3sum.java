@@ -1,8 +1,10 @@
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /* 
 
@@ -37,14 +39,103 @@ Constraints
 EASY
 */
 
+class Solution1
+{
+    public List<List<Integer>> threeSum(int[] nums) 
+    {
+        // brute
+        List<List<Integer>> result=new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            for(int j=i+1;j<nums.length;j++)
+            {
+                for(int k=j+1;k<nums.length;k++)
+                {
+                    int sum=nums[i]+nums[j]+nums[k];
+                    if(sum==0)
+                    {
+                        List<Integer> temp=new ArrayList<>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                        Collections.sort(temp);
+                        if(!result.contains(temp))
+                        {
+                            result.add(temp);
+                        }
+                    }
+                }
+            }
+
+        }
+        return result;
+    }
+}
+
+class Solution2
+{
+    public List<List<Integer>> threeSum(int[] nums) 
+    {
+        // brute (using set to handle duplicates)
+        Set<List<Integer>> result=new HashSet<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            for(int j=i+1;j<nums.length;j++)
+            {
+                for(int k=j+1;k<nums.length;k++)
+                {
+                    int sum=nums[i]+nums[j]+nums[k];
+                    if(sum==0)
+                    {
+                        List<Integer> temp=new ArrayList<>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                        Collections.sort(temp);
+                        result.add(temp);
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
+}
+
+class Solution3
+{
+    public List<List<Integer>> threeSum(int[] nums) 
+    {
+        // better
+        Set<List<Integer>> result=new HashSet<>();
+        for(int i=0;i<nums.length-1;i++)
+        {
+            Set<Integer> hash=new HashSet<>();
+            for(int j=i+1;j<nums.length;j++)
+            {
+                int third=-(nums[i]+nums[j]);
+                if(hash.contains(third))
+                {
+                    List<Integer> temp=new ArrayList<>();
+                    temp.add(nums[i]);
+                    temp.add(nums[j]);
+                    temp.add(third);
+                    Collections.sort(temp);
+                    result.add(temp);
+                }
+                hash.add(nums[j]);
+            }
+        }
+        return new ArrayList<>(result);
+    }
+}
+
 class Solution 
 {
     public List<List<Integer>> threeSum(int[] nums) 
     {
-        // Optimal
+        // optimal
         Arrays.sort(nums);
-        
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> result=new ArrayList<>();
         for(int i=0;i<nums.length;i++)
         {
             if(i>0 && nums[i]==nums[i-1])
@@ -66,7 +157,10 @@ class Solution
                 }
                 else
                 {
-                    List<Integer> temp=Arrays.asList(nums[i],nums[j],nums[k]);
+                    List<Integer> temp=new ArrayList<>();
+                    temp.add(nums[i]);
+                    temp.add(nums[j]);
+                    temp.add(nums[k]);
                     result.add(temp);
                     j++;
                     k--;
