@@ -1,4 +1,3 @@
-package Arrays.Medium;
 
 /*
 
@@ -24,27 +23,83 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int maxSubArray(int[] nums) 
     {
-        //KADANE'S ALGORITHM (OPTIMAL)
-        
-        int maxi=Integer.MIN_VALUE;
-        int sum=0;
+        // brute;
+        int largest=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++)
+        {
+            int sum=0;
+            for(int j=i;j<nums.length;j++)
+            {
+                sum+=nums[j];
+                if(sum>largest)
+                {
+                    largest=sum;
+                }
+            }
+        }
+        return largest;
+    }
+}
 
+class Solution2 
+{
+    public int maxSubArray(int[] nums) 
+    {
+        // optimal;
+        // Kadane's-Algorithm;
+        int largest=Integer.MIN_VALUE;
+        int sum=0;
         for(int i=0;i<nums.length;i++)
         {
             sum=sum+nums[i];
-            if(sum>maxi)
+            if(sum>largest)
             {
-                maxi=sum;
+                largest=sum;
             }
             if(sum<0)
             {
                 sum=0;
+            }            
+        }
+        return largest;
+    }
+}
+
+class Solution3
+{
+    public int maxSubArray(int[] nums) 
+    {
+        // optimal
+        // Kadane's-Algorithm
+        // to print the Subarray
+        int largest=Integer.MIN_VALUE;
+        int sum=0;
+        int ansStart=-1;
+        int ansEnd=-1;
+        int start=-1;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(sum==0)
+            {
+                start=i;
             }
-        } 
-        return maxi;       
+            sum=sum+nums[i];
+            if(sum>largest)
+            {
+                largest=sum;
+                ansStart=start;
+                ansEnd=i;
+            }
+            if(sum<0)
+            {
+                start=i+1;
+                sum=0;
+            }            
+        }
+        return largest;
     }
 }
