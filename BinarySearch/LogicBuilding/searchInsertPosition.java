@@ -1,4 +1,4 @@
-package BinarySearch.BSOn1DArrays;
+package BinarySearch.LogicBuilding;
 
 /*
 
@@ -25,7 +25,7 @@ nums contains distinct values sorted in ascending order.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int searchInsert(int[] nums, int target) 
     {
@@ -35,14 +35,45 @@ class Solution
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(nums[mid]>=target)
+            if(nums[mid]==target)
+            {
+                return mid; // answer 
+            }
+            // maybe an answer
+            else if(nums[mid]>target)
             {
                 ans=mid;
-                high=mid-1;
+                high=mid-1; // look for small index on left
             }
             else
             {
-                low=mid+1;
+                low=mid+1; // look for right
+            }
+        }
+        return ans;
+    }
+}
+
+class Solution2
+{
+    public int searchInsert(int[] nums, int target) 
+    {
+        // exact same like lower bound 
+        int low=0;
+        int high=nums.length-1;
+        int ans=nums.length;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(nums[mid]>=target)
+            {
+                // maybe an answer 
+                ans=mid;
+                high=mid-1; // look for small index on left
+            }
+            else
+            {
+                low=mid+1; // look for right
             }
         }
         return ans;

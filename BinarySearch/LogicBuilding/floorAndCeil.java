@@ -1,4 +1,4 @@
-package BinarySearch.BSOn1DArrays;
+package BinarySearch.LogicBuilding;
 
 /*
 
@@ -26,21 +26,21 @@ nums is sorted in ascending order.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int[] getFloorAndCeil(int[] nums, int x) 
     {
+        // simple straightforward approach
         int low=0;
         int high=nums.length-1;
         int floor=-1;
         int ceil=-1;
-
         while(low<=high)
         {
             int mid=low+(high-low)/2;
             if(nums[mid]==x)
             {
-                return new int[]{x,x};
+                return new int[]{nums[mid],nums[mid]};
             }
             else if(nums[mid]>x)
             {
@@ -54,5 +54,57 @@ class Solution
             }
         }
         return new int[]{floor,ceil};
+    }
+}
+
+class Solution2
+{
+    public int[] getFloorAndCeil(int[] nums, int x) 
+    {
+        int ceil=findFloor(nums,x);
+        int floor=findfloor(nums,x);
+        return new int[]{floor,ceil};
+    }
+    public int findFloor(int[] nums, int x) // lowerBound
+    {
+        int low=0;
+        int high=nums.length-1;
+        int ceil=-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            // maybe an answer
+            if(nums[mid]>=x)
+            {
+                ceil=nums[mid];
+                high=mid-1; 
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ceil;
+    }
+    public int findfloor(int[] nums, int x) 
+    {
+        int low=0;
+        int high=nums.length-1;
+        int floor=-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            // maybe an answer
+            if(nums[mid]<=x)
+            {
+                floor=nums[mid];
+                low=mid+1; 
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return floor;
     }
 }
