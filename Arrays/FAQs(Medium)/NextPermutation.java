@@ -1,4 +1,7 @@
-
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /*
 
@@ -32,14 +35,130 @@ Constraints
 MEDIUM
 */
 
-class Solution 
+class Solution1 
 {
     public void nextPermutation(int[] nums) 
     {
-        int size=nums.length;
-        int index=-1;
+        // brute
+        // generating all the possiblePermutations then finding the nextPermutation using an extra array as Map
+        Set<List<Integer>> uniquePermutations=new HashSet<>();
+        int hash[]=new int[nums.length];
+        List<Integer> pair=new ArrayList<>();
+        generatePermutation(nums,pair,hash,uniquePermutations);
+        List<List<Integer>> allPermutations=new ArrayList<>(uniquePermutations);
+        allPermutations.sort((a,b) -> {
+            for(int i=0;i<a.size();i++)
+            {
+                int cmp=Integer.compare(a.get(i),b.get(i));
+                if(cmp!=0)
+                {
+                    return cmp;
+                }
+            }
+            return 0;
+        });
+        List<Integer> current=new ArrayList<>();
+        for(int n : nums)
+        {
+            current.add(n);
+        }
+        int currentIndex=allPermutations.indexOf(current);
+        int nextIndex=(currentIndex +1)%allPermutations.size();
+        List<Integer> next=allPermutations.get(nextIndex);
+        for(int i=0;i<next.size();i++)
+        {
+            nums[i]=next.get(i);
+        }
+    }
+    public void generatePermutation(int[] nums,List<Integer> pair,int []hash,Set<List<Integer>> uniquePermutations)
+    {
+        if(pair.size()==nums.length)
+        {
+            uniquePermutations.add(new ArrayList<>(pair));
+            return ;
+        }
+        for(int i=0;i<nums.length;i++)
+        {
+            if(hash[i]==0)
+            {
+                hash[i]=1;
+                pair.add(nums[i]);
+                generatePermutation(nums,pair,hash,uniquePermutations);
+                pair.remove(pair.size()-1);
+                hash[i]=0;
+            }
+        }
+    }
+}
 
-        for(int i=size-2;i>=0;i--)
+class Solution2
+{
+    public void nextPermutation(int[] nums) 
+    {
+        // brute
+        // generating all the possiblePermutations then finding the nextPermutation without using extra space
+        Set<List<Integer>> uniquePermutations=new HashSet<>();
+        generatePermutation(0,nums,uniquePermutations);
+        List<List<Integer>> allPermutations=new ArrayList<>(uniquePermutations);
+        allPermutations.sort((a,b) -> {
+            for(int i=0;i<a.size();i++)
+            {
+                int cmp=Integer.compare(a.get(i),b.get(i));
+                if(cmp!=0)
+                {
+                    return cmp;
+                }
+            }
+            return 0;
+        });
+        List<Integer> current=new ArrayList<>();
+        for(int n : nums)
+        {
+            current.add(n);
+        }
+        int currentIndex=allPermutations.indexOf(current);
+        int nextIndex=(currentIndex+1)%allPermutations.size();
+        List<Integer> next=allPermutations.get(nextIndex);
+        for(int i=0;i<next.size();i++)
+        {
+            nums[i]=next.get(i);
+        }
+    }
+    public void generatePermutation(int index,int []nums,Set<List<Integer>> uniquePermutations)
+    {
+        if(index==nums.length)
+        {
+            List<Integer> pair =new ArrayList<>();
+            for(int i=0;i<nums.length;i++)
+            {
+                pair.add(nums[i]);
+            }
+            uniquePermutations.add(new ArrayList<>(pair));
+            return ;
+        }
+        for(int i=index;i<nums.length;i++)
+        {
+            swap(i,index,nums);
+            generatePermutation(index+1,nums,uniquePermutations);
+            swap(i,index,nums);
+        }
+    }
+    public void swap(int i,int j,int []nums)
+    {
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}
+
+class Solution3 
+{
+    public void nextPermutation(int[] nums) 
+    {
+        // optimal
+        int index=-1;
+        // finding a breakpoint
+        for(int i=nums.length-2;i>=0;i--)
         {
             if(nums[i]<nums[i+1])
             {
@@ -47,31 +166,32 @@ class Solution
                 break;
             }
         }
-        if(index == -1)
+        if(index==-1)
         {
-            for(int i=0;i<size/2;i++)
-            {
-                int temp=nums[i];
-                nums[i]=nums[size-1-i];
-                nums[size-1-i]=temp;
-            }
+            reverse(nums,0,nums.length-1);
             return;
-        }
-        else
+        } 
+        // swapping breakpoint number with the smallest greater number available (suffix is already sorted in descending order)
+
+        for(int i=nums.length-1;i>=index;i--)
         {
-            for(int i=size-1;i>index;i--)
+            if(nums[i]>nums[index])
             {
-                if(nums[i]>nums[index])
-                {
-                    int temp=nums[index];
-                    nums[index]=nums[i];
-                    nums[i]=temp;
-                    break;
-                }
+                swap(nums,i,index);
+                break;
             }
         }
-        int start=index+1;
-        int end=size-1;
+        // reversing the array after the breapoint to generate the smallest possible number (array is in descending order so reversing it will make it in ascending order)
+        reverse(nums,index+1,nums.length-1);
+    }
+    public void swap(int[] nums,int left,int right)
+    {
+        int temp=nums[left];
+        nums[left]=nums[right];
+        nums[right]=temp;
+    } 
+    public void reverse(int[] nums,int start,int end)
+    {
         while(start<end)
         {
             int temp=nums[start];
@@ -80,5 +200,5 @@ class Solution
             start++;
             end--;
         }
-    }
+    } 
 }

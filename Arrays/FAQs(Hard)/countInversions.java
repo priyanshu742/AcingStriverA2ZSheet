@@ -1,5 +1,3 @@
-package Arrays.Hard;
-
 
 /* 
 
@@ -35,50 +33,67 @@ Constraints
 MEDIUM
 */
 
-class Solution 
+class Solution1
 {
-    // optimal
     public long numberOfInversions(int[] nums) 
     {
-        return mergeSort(nums,0,nums.length-1);
-    }
-
-    public int mergeSort(int nums[],int low,int high)
-    {
+        // brute
         int count=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            for(int j=i+1;j<nums.length;j++)
+            {
+                if(nums[i]>nums[j])
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+class Solution2 
+{
+    public long numberOfInversions(int[] nums) 
+    {
+        return (long)divide(nums,0,nums.length-1);  
+    }
+    public long divide(int nums[],int low,int high)
+    {
+        long count=0;
         if(low>=high)
         {
             return count;
         }
-        int mid=(low+high)/2;
-        count+=mergeSort(nums,low,mid);
-        count+=mergeSort(nums,mid+1,high);
+        int mid=low+(high-low)/2;
+        count+=divide(nums,low,mid);
+        count+=divide(nums,mid+1,high);
         count+=merge(nums,low,mid,high);
         return count;
     }
-
-    public int merge(int nums[],int low,int mid,int high)
+    public long merge(int nums[],int low,int mid,int high)
     {
-        int count=0;
-        int index=0;
         int temp[]=new int[high-low+1];
+        int index=0;
         int left=low;
         int right=mid+1;
-        while(left<=mid && right <=high)
+        long count=0;
+        while(left<=mid && right<=high)
         {
-            if (nums[left]<=nums[right])
+            if(nums[left]<=nums[right])
             {
                 temp[index]=nums[left];
                 index++;
                 left++;
             }
-            //right is smaller
+            // right is smaller
             else
             {
                 temp[index]=nums[right];
-                count+=(mid-left+1);
                 index++;
                 right++;
+                count+=(mid-left+1);
             }
         }
         while(left<=mid)
@@ -90,8 +105,8 @@ class Solution
         while(right<=high)
         {
             temp[index]=nums[right];
-            index++;
             right++;
+            index++;
         }
         for(int i=low;i<=high;i++)
         {
