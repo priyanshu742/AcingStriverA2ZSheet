@@ -172,7 +172,6 @@ class Solution3
             return;
         } 
         // swapping breakpoint number with the smallest greater number available (suffix is already sorted in descending order)
-
         for(int i=nums.length-1;i>=index;i--)
         {
             if(nums[i]>nums[index])

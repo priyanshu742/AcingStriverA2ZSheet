@@ -1,4 +1,3 @@
-package Arrays.Hard;
 
 /*
 
@@ -27,16 +26,37 @@ Constraints
 EASY
 */
 
-class Solution
+class Solution1 
 {
     public int maxProduct(int[] nums) 
     {
-        // optimal intuitive
-        int size=nums.length;
-        int maximum=Integer.MIN_VALUE;
+       int max=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++)
+        {
+            int product=1;
+            for(int j=i;j<nums.length;j++)
+            {
+                product*=nums[j];
+                if(product>max)
+                {
+                    max=product;
+                }
+            }
+        }
+        return max; 
+    }
+}
+
+class Solution 
+{
+    public int maxProduct(int[] nums) 
+    {
+        // optimal intutive
+        int n=nums.length;
         int prefix=1;
         int suffix=1;
-        for(int i=0;i<size;i++)
+        int maxi=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++)
         {
             if(prefix==0)
             {
@@ -46,10 +66,10 @@ class Solution
             {
                 suffix=1;
             }
-            prefix=prefix*nums[i];
-            suffix=suffix*nums[size-i-1];
-            maximum=Math.max(maximum,Math.max(prefix,suffix));
+            prefix*=nums[i];
+            suffix*=nums[n-i-1];
+            maxi=Math.max(maxi,Math.max(prefix,suffix));
         }
-        return maximum;
+        return maxi;
     }
 }
