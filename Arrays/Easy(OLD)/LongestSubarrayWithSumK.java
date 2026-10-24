@@ -42,19 +42,15 @@ class Solution
         for(int i=0;i<nums.length;i++)
         {
             sum=sum+nums[i];
-
             if(sum==k)
             {
                 maxLength=i+1;
             }
-
             int rem=sum-k;
-
             if(dict.containsKey(rem))
             {
                 maxLength=Math.max(maxLength,i-dict.get(rem));
             }
-            
             if(!dict.containsKey(sum))
             {
                 dict.put(sum,i);
