@@ -1,4 +1,4 @@
-package Arrays.Medium;
+package Hashing.FAQs;
 
 import java.util.HashMap;
 import java.util.Map;

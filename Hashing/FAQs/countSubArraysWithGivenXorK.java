@@ -1,4 +1,4 @@
-package Arrays.Hard;
+package Hashing.FAQs;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package Arrays.Hard;
+package Hashing.FAQs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,25 +31,55 @@ EASY
 
 class Solution 
 {
-    // optimal
     public int maxLen(int[] arr) 
     {
-        int sum=0;
-        int maxLen=0;
-        Map<Integer,Integer> dict=new HashMap<>();
-        dict.put(0,-1);
+        // brute
+        int longest=0;
         for(int i=0;i<arr.length;i++)
         {
+            int count=0;
+            int sum=0;
+            for(int j=i;j<arr.length;j++)
+            {
+                sum=sum+arr[j];
+                count++;
+                if(sum==0)
+                {
+                    if(count>longest)
+                    {
+                        longest=count;
+                    }
+                }
+            }
+        }
+        return longest;
+    }
+}
+
+class Solution 
+{
+    public int maxLen(int[] arr) 
+    {
+       // optimal
+       int longest=0;
+       int sum=0;
+       Map<Integer,Integer> dict=new HashMap<>();
+       for(int i=0;i<arr.length;i++)
+       {
             sum=sum+arr[i];
+            if(sum==0)
+            {
+                longest=i+1;
+            }
             if(dict.containsKey(sum))
             {
-                maxLen=Math.max(maxLen,i-dict.get(sum));
+                longest=Math.max(longest,i-dict.get(sum));
             }
-            else
+            if(!dict.containsKey(sum))
             {
                 dict.put(sum,i);
             }
-        }
-        return maxLen;
+       }
+       return longest;
     }
 }
