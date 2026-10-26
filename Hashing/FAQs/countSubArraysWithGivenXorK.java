@@ -26,25 +26,49 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int subarraysWithXorK(int[] nums, int k) 
     {
-        //Optimal
-        Map<Integer,Integer> dict=new HashMap<>();
-        dict.put(0,1);
+        // brute
         int count=0;
-        int xor=0;
         for(int i=0;i<nums.length;i++)
         {
-            xor=xor^nums[i];
-
-            int x=xor^k;
-            if(dict.containsKey(x))
+            int xor=0;
+            for(int j=i;j<nums.length;j++)
             {
-                count=count+dict.get(x);
+                xor=xor^nums[j];
+                if(xor==k)
+                {
+                    count++;
+                }
             }
-            dict.put(xor,dict.getOrDefault(xor,0)+1);
+        }
+        return count;
+    }
+}
+
+class Solution2
+{
+    public int subarraysWithXorK(int[] nums, int k) 
+    {
+        // optimal
+        int count=0;
+        int xr=0;
+        Map<Integer,Integer> dict=new HashMap<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            xr=xr^nums[i];
+            if(xr==k)
+            {
+                count++;
+            }
+            int prefix=xr^k;
+            if(dict.containsKey(prefix))
+            {
+                count=count+dict.get(prefix);
+            }
+            dict.put(xr,dict.getOrDefault(xr,0)+1);
         }
         return count;
     }

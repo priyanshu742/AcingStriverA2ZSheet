@@ -26,29 +26,51 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1 
 {
-    //OPTIMAL
     public int subarraySum(int[] nums, int k) 
     {
-        Map<Integer,Integer> dict=new HashMap<>();
+        // brute
+        int count=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            int sum=0;
+            for(int j=i;j<nums.length;j++)
+            {
+                sum=sum+nums[j];
+                if(sum==k)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+class Solution2
+{
+    public int subarraySum(int[] nums, int k) 
+    {
+        // optimal
+        int count=0;
         int sum=0;
-        int total=0;
-
-        dict.put(0,1);
-
+        Map<Integer,Integer> dict=new HashMap<>();
         for(int i=0;i<nums.length;i++)
         {
             sum=sum+nums[i];
-
-            int prefixSum=sum-k;
-            if(dict.containsKey(prefixSum))
+            if(sum==k)
             {
-                total=total+dict.get(prefixSum);
+                count++;
             }
-            
+            int prefix=sum-k;
+            if(dict.containsKey(prefix))
+            {
+                count=count+dict.get(prefix);
+            }
             dict.put(sum,dict.getOrDefault(sum,0)+1);
+            
         }
-        return total;
+        return count;
     }
 }
