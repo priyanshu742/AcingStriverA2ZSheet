@@ -1,4 +1,4 @@
-package BinarySearch.BSOn1DArrays;
+package BinarySearch.LogicBuilding;
 
 /*
 
@@ -9,12 +9,14 @@ Find the index at which k is present and if k is not present return -1.
 Example 1
 Input : nums = [4, 5, 6, 7, 0, 1, 2], k = 0
 Output: 4
-Explanation: Here, the target is 0. We can see that 0 is present in the given rotated sorted array, nums. Thus, we get output as 4, which is the index at which 0 is present in the array.
+Explanation: Here, the target is 0. We can see that 0 is present in the given rotated sorted array, nums. 
+Thus, we get output as 4, which is the index at which 0 is present in the array.
 
 Example 2
 Input: nums = [4, 5, 6, 7, 0, 1, 2], k = 3
 Output: -1
-Explanation: Here, the target is 3. Since 3 is not present in the given rotated sorted array. Thus, we get the output as -1.
+Explanation: Here, the target is 3. Since 3 is not present in the given rotated sorted array. 
+Thus, we get the output as -1.
 
 
 Constraints
@@ -27,13 +29,29 @@ nums is an ascending array that is possibly rotated.
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int search(int[] nums, int k) 
     {
+        // linear Search
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==k)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+class Solution2 
+{
+    public int search(int[] nums, int k) 
+    {
+        // binarySearch
         int low=0;
         int high=nums.length-1;
-
         while(low<=high)
         {
             int mid=low+(high-low)/2;
@@ -41,8 +59,7 @@ class Solution
             {
                 return mid;
             }
-            
-            // If left half is sorted
+            // left half is sorted
             if(nums[low]<=nums[mid])
             {
                 if(nums[low]<=k && k<=nums[mid])
@@ -54,10 +71,10 @@ class Solution
                     low=mid+1;
                 }
             }
-            // If the right half is sorted
+            // right half is sorted
             else
             {
-                if(nums[mid]<=k && k<=nums[high])
+                if(nums[high]>=k && k>=nums[mid])
                 {
                     low=mid+1;
                 }

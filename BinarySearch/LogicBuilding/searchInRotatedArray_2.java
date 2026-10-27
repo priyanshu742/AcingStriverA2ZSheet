@@ -1,4 +1,4 @@
-package BinarySearch.BSOn1DArrays;
+package BinarySearch.LogicBuilding;
 
 /*
 
@@ -26,13 +26,28 @@ nums is guaranteed to be rotated at some pivot.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public boolean searchInARotatedSortedArrayII(int[] nums, int k) 
     {
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==k)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class Solution2 
+{
+    public boolean searchInARotatedSortedArrayII(int[] nums, int k) 
+    {
+        // binarySearch
         int low=0;
         int high=nums.length-1;
-
         while(low<=high)
         {
             int mid=low+(high-low)/2;
@@ -40,14 +55,13 @@ class Solution
             {
                 return true;
             }
-            
             if(nums[low]==nums[mid] && nums[mid]==nums[high])
             {
-                low=low+1;
-                high=high-1;
+                low++;
+                high--;
                 continue;
             }
-            // If the left half is sorted
+            // left half is sorted
             if(nums[low]<=nums[mid])
             {
                 if(nums[low]<=k && k<=nums[mid])
@@ -59,10 +73,10 @@ class Solution
                     low=mid+1;
                 }
             }
-            // If the right half is sorted
+            //right half is sorted
             else
             {
-                if(nums[mid]<=k && k<=nums[high])
+                if(nums[high]>=k && k>=nums[mid])
                 {
                     low=mid+1;
                 }
