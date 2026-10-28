@@ -1,4 +1,4 @@
-package BinarySearch.BSOn1DArrays;
+package BinarySearch.FAQs;
 
 /*
 

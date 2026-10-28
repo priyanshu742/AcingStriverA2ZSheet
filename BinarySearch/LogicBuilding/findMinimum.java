@@ -28,7 +28,7 @@ nums is sorted and rotated between 1 and n times.
 EASY    
 */
 
-class Solution1
+class Solution1 
 {
     public int findMin(ArrayList<Integer> arr) 
     {
@@ -59,13 +59,19 @@ class Solution2
             // left half is sorted
             if(arr.get(low)<=arr.get(mid))
             {
-                minimum=Math.min(minimum,arr.get(low));
+                if(arr.get(low)<minimum)
+                {
+                    minimum=arr.get(low);
+                }
                 low=mid+1;
             }
             // right half is sorted
             else
             {
-                minimum=Math.min(minimum,arr.get(mid));
+                if(arr.get(mid)<minimum)
+                {
+                    minimum=arr.get(mid);
+                }
                 high=mid-1;
             }
         }
@@ -73,7 +79,7 @@ class Solution2
     }
 }
 
-class Solution3 
+class Solution3
 {
     public int findMin(ArrayList<Integer> arr) 
     {
@@ -85,24 +91,33 @@ class Solution3
         {
             int mid=low+(high-low)/2;
             /*
-            if after repeatedly dividing the array into half the entire search space 
+            if after repeatedly dividing the array into half,the entire search space 
             is already sorted, then always arr[low] will be the smaller in that SearchSpace 
             */
             if(arr.get(low)<=arr.get(high))
             {
-                minimum=Math.min(minimum,arr.get(low));
+                if(arr.get(low)<minimum)
+                {
+                    minimum=arr.get(low);
+                }
                 break;
             }
             // left half is sorted
             if(arr.get(low)<=arr.get(mid))
             {
-                minimum=Math.min(minimum,arr.get(low));
+                if(arr.get(low)<minimum)
+                {
+                    minimum=arr.get(low);
+                }
                 low=mid+1;
             }
             // right half is sorted
             else
             {
-                minimum=Math.min(minimum,arr.get(mid));
+                if(arr.get(mid)<minimum)
+                {
+                    minimum=arr.get(mid);
+                }
                 high=mid-1;
             }
         }
@@ -110,7 +125,7 @@ class Solution3
     }
 }
 
-class Solution4 
+class Solution 
 {
     public int findMin(ArrayList<Integer> arr) 
     {
@@ -122,9 +137,24 @@ class Solution4
         while(low<=high)
         {
             int mid=low+(high-low)/2;
+            /*
+            if after repeatedly dividing the array into half,the entire search space 
+            is already sorted, then always arr[low] will be the smaller in that SearchSpace 
+            */
+            if(arr.get(low)<=arr.get(high))
+            {
+                if(arr.get(low)<minimum)
+                {
+                    minimum=arr.get(low);
+                }
+                break;
+            }
             if(arr.get(low)==arr.get(mid) && arr.get(mid)==arr.get(high))
             {
-                minimum=Math.min(minimum,arr.get(low));
+                if(arr.get(low)<minimum)
+                {
+                    minimum=arr.get(low);
+                }
                 low++;
                 high--;
                 continue;
@@ -132,13 +162,19 @@ class Solution4
             // left half is sorted
             if(arr.get(low)<=arr.get(mid))
             {
-                minimum=Math.min(minimum,arr.get(low));
+                if(arr.get(low)<minimum)
+                {
+                    minimum=arr.get(low);
+                }
                 low=mid+1;
             }
             // right half is sorted
             else
             {
-                minimum=Math.min(minimum,arr.get(mid));
+                if(arr.get(mid)<minimum)
+                {
+                    minimum=arr.get(mid);
+                }
                 high=mid-1;
             }
         }

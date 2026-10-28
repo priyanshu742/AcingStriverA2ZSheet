@@ -1,4 +1,4 @@
-package BinarySearch.BSOnAnswers;
+package BinarySearch.OnAnswers;
 
 
 /*
