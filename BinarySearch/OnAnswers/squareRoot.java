@@ -19,13 +19,36 @@ Explanation: The square root of 28 is approximately 5.292. So, the floor value w
 Constraints
 0 <= n <= 231 - 1
 
-MEDIUM
+EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int floorSqrt(int n) 
     {
+        // linearSearch
+        if(n==0)
+        {
+            return 0;
+        }
+        int ans=1;
+        for(int i=1;i<=n/i;i++)
+        {
+            ans=i;
+        }
+        return ans;
+    }
+}
+
+class Solution2 
+{
+    public int floorSqrt(int n) 
+    {
+        // binarySearch
+        if(n==0)
+        {
+            return 0;
+        }
         int low=1;
         int high=n;
         int ans=1;
@@ -42,7 +65,6 @@ class Solution
                 high=mid-1;
             }
         }
-        return ans;
-        //return high;
+        return ans; // return high
     }
 }
