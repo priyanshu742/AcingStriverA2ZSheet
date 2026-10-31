@@ -31,36 +31,81 @@ nums.length <= limit <= 106
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public int smallestDivisor(int[] nums, int limit) 
     {
-        int low=1;
-        int high=Integer.MIN_VALUE;
-
-        for(int n: nums)
+        //LinearSearch
+        if(limit<nums.length)
         {
-            high=Math.max(n,high);
+            return -1;
         }
-
-        while(low<=high)
+        int high=Integer.MIN_VALUE;
+        for(int n : nums)
         {
-            int total=0;
-            int mid=low+(high-low)/2;
+            if(n>high)
+            {
+                high=n;
+            }
+        }
+        for(int i=1;i<=high;i++)
+        {
+            int sum=0;
             for(int n : nums)
             {
-                total=total+(n+mid-1)/mid;
+                sum=sum+(n+i-1)/i;
             }
-
-            if(total<=limit)
+            if(sum<=limit)
             {
+                return i;
+            }
+        }
+        return high;
+    }
+}
+
+class Solution2 
+{
+    public int smallestDivisor(int[] nums, int limit) 
+    {
+        // binarySearch
+        if(limit<nums.length)
+        {
+            return -1;
+        }
+        int low=1;
+        int high=Integer.MIN_VALUE;
+        for(int n : nums)
+        {
+            if(n>high)
+            {
+                high=n;
+            }
+        }
+        int ans=-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            int threshold=function(nums,mid);
+            if(threshold<=limit)
+            {
+                ans=mid;
                 high=mid-1;
             }
-            else if(total>limit)
+            else
             {
                 low=mid+1;
             }
         }
-        return low;
+        return ans; // return low
     }
+    public int function(int[] nums, int divisor)
+    {
+        int sum=0;
+        for(int n : nums)
+        {
+            sum=sum+(n+divisor-1)/divisor;
+        }
+        return sum;
+    } 
 }

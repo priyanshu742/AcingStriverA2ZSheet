@@ -25,62 +25,112 @@ Constraints
 1 <= n, m <= 104
 1 <= nums[i] <= 105
 
-HARD    
+MEDIUM
 */
 
-class Solution 
+class Solution1 
 {
     public int findPages(int[] nums, int m) 
     {
-        if(nums.length<m)
+        // linearSearch
+        if(m>nums.length)
         {
             return -1;
         }
         int low=Integer.MIN_VALUE;
         int high=0;
-        for(int n: nums)
+        int ans=-1;
+        for(int n : nums)
         {
+            high=high+n;
             if(n>low)
             {
                 low=n;
             }
-            high=high+n;
         }
-
-        while(low<=high)
+        for(int i=low;i<=high;i++)
         {
-            int mid=low+(high-low)/2;
-            int Students=countStudents(nums,mid);
-
-            if(Students<=m)
+            int noOfstudents=calculate(nums,i);
+            if(noOfstudents<=m)
             {
-                high=mid-1;
-            }
-            else if(Students>m)
-            {
-                low=mid+1;
+                ans=i;
+                break;
             }
         }
-        return low;
+        return ans;
     }
-
-    public int countStudents(int nums[],int total)
+    public int calculate(int[] nums, int noOfPages)
     {
         int student=1;
         int pages=0;
-
-        for(int n:nums)
+        for(int i=0;i<nums.length;i++)
         {
-            if(pages+n<=total)
+            if(pages+nums[i]<=noOfPages)
             {
-                pages=pages+n;
+                pages=pages+nums[i];
             }
             else
             {
                 student++;
-                pages=n;
+                pages=nums[i];
             }
         }
         return student;
+    } 
+}
+    
+class Solution2
+{
+    public int findPages(int[] nums, int m) 
+    {
+        // binarySearch
+        if(m>nums.length)
+        {
+            return -1;
+        }
+        int low=Integer.MIN_VALUE;
+        int high=0;
+        int ans=-1;
+        for(int n : nums)
+        {
+            high=high+n;
+            if(n>low)
+            {
+                low=n;
+            }
+        }
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            int noOfStudents=calculate(nums,mid);
+            if(noOfStudents<=m)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans; // return low
     }
+    public int calculate(int[] nums, int maxPages)
+    {
+        int student=1;
+        int pages=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(pages+nums[i]<=maxPages)
+            {
+                pages=pages+nums[i];
+            }
+            else
+            {
+                student++;
+                pages=nums[i];
+            }
+        }
+        return student;
+    } 
 }

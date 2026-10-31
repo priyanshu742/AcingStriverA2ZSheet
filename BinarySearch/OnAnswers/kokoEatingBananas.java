@@ -24,40 +24,142 @@ Constraints
 n <= h <= 109
 1 <= nums[i] <= 109
 
-HARD   
+EASY 
 */
 
-class Solution 
+class Solution1
 {
     public int minimumRateToEatBananas(int[] nums, int h) 
     {
-        int max=Integer.MIN_VALUE;
-        for(int n: nums)
+        //  linearSearch
+        int high=0;
+        int ans=0;
+        if(h<nums.length)
         {
-           max=Math.max(n,max);
+            return -1;
         }
+        for(int n : nums)
+        {
+            if(n>high)
+            {
+                high=n;
+            }
+        }
+        for(int i=1;i<=high;i++)
+        {
+            int noOfHours=0;
+            for(int n : nums)
+            {
+                noOfHours=noOfHours+(n+i-1)/i;
+                if(noOfHours>h)
+                {
+                    break;
+                }
+            }
+            if(noOfHours<=h)
+            {
+                ans=i;
+                break;
+            }
+        }
+        return ans; 
+    }
+}
 
+class Solution2
+{
+    public int minimumRateToEatBananas(int[] nums, int h) 
+    {
+        // binarySearch 
+        if(h<nums.length)
+        {
+            return -1;
+        }
         int low=1;
-        int high=max;
+        int high=Integer.MIN_VALUE;
+        for(int n : nums)
+        {
+            if(n>high)
+            {
+                high=n;
+            }
+        }
+        int ans=-1;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            long totalHours=0;
-
-            for(int n: nums)
+            long noOfHours=calculate(nums,mid,h);
+            if(noOfHours<=h)
             {
-                totalHours=totalHours+((long)n+mid-1)/mid;
-            }
-
-            if(totalHours<=h)
-            {                    
+                ans=mid;
                 high=mid-1;
             }
-            else if(totalHours>h)
+            else
             {
                 low=mid+1;
             }
         }
-        return low;
+        return ans; // return low
+    }
+    public long calculate(int nums[],int rate,int h)
+    {
+        long hours=0;
+        for(int n : nums)
+        {
+            hours=hours+(n+rate-1)/rate;
+        }
+        return hours;
+    }
+}
+
+class Solution3
+{
+    public int minimumRateToEatBananas(int[] nums, int h) 
+    {
+        // binarySearch 
+        // returns 1 if hours <=h
+        // returns 2 if hours > h
+        if(h<nums.length)
+        {
+            return -1;
+        }
+        int low=1;
+        int high=Integer.MIN_VALUE;
+        for(int n : nums)
+        {
+            if(n>high)
+            {
+                high=n;
+            }
+        }
+        int ans=-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            int noOfHours=calculate(nums,mid,h);
+            if(noOfHours==1)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans; // return low
+    }
+    public int calculate(int nums[],int rate,int h)
+    {
+        long hours=0;
+        for(int n : nums)
+        {
+            hours=hours+(n+rate-1)/rate;
+            if(hours>h)
+            {
+                return 2;
+            }
+        }
+        return 1;
     }
 }

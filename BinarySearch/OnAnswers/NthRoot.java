@@ -25,22 +25,63 @@ Constraints
 EASY
 */
 
+class Solution1 
+{
+    // LinearSearch
+    public int NthRoot(int N, int M) 
+    {
+        for(int i=1;i<=M;i++)
+        {
+            int calculate=root(i,N,M);
+            if(calculate==1)                
+            {
+                return i;
+            }
+            else if(calculate==2)
+            {
+                break;
+            }
+        }
+        return -1;
+    }
+    public int root(int mid, int N,int M) 
+    {
+        long result=1;
+        for(int i=0;i<N;i++)
+        {
+            result*=mid;
+            if(result>M)
+            {
+                return 2;
+            }
+        }
+        if(result==M)
+        {
+            return 1;
+        }
+        return 0;
+    }
+}
 
-class Solution 
+class Solution2
 {
     public int NthRoot(int N, int M) 
     {
+        // binarySearch
+        // returns 2 if result > M
+        // returns 1 if result == M
+        // returns 0 if result < M
         int low=1;
         int high=M;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-
-            if(pow(mid,N,M)==1)
+            int calculate=pow(mid,N,M);
+            if(calculate==1)
             {
                 return mid;
             }
-            else if(pow(mid,N,M)==2)
+            else if(calculate==2)
             {
                 high=mid-1;
             }
@@ -49,24 +90,20 @@ class Solution
                 low=mid+1;
             }
         }
-        return -1; 
+        return -1;
     }
-
-    public int pow(int mid,int N,int M)
+    public int pow(int mid, int N,int M) 
     {
-        // return 1 if ==M
-        // return 2 if > M
-        // return 0 if < M
-        long ans=1;
-        for(int i=1;i<=N;i++)
+        long result=1;
+        for(int i=0;i<N;i++)
         {
-            ans=ans*mid;
-            if(ans>M)
+            result*=mid;
+            if(result>M)
             {
-                return 2; 
+                return 2;
             }
         }
-        if(ans==M)
+        if(result==M)
         {
             return 1;
         }

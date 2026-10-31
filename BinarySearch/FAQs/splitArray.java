@@ -1,6 +1,5 @@
 package BinarySearch.FAQs;
 
-
 /*
 
 Given an integer array a of size n and an integer k.
@@ -25,58 +24,104 @@ Constraints
 1 ≤ k ≤ n
 1 ≤ a[i] ≤ 104
 
-HARD
+MEDIUM
 */
 
-class Solution 
+class Solution1 
 {
     public int largestSubarraySumMinimized(int[] a, int k) 
     {
+        // linearSearch
         int low=Integer.MIN_VALUE;
         int high=0;
-        for(int n:a)
+        int ans=-1;
+        for(int n : a)
         {
+            high=high+n;
             if(n>low)
             {
                 low=n;
             }
-            high=high+n;
         }
+        for(int i=low;i<=high;i++)
+        {
+            int noOfSubArrays=calculate(a,i);
+            if(noOfSubArrays<=k)
+            {
+                ans=i;
+                break;
+            }
+        }
+        return ans;
+    }
+    public int calculate(int[] a, int limit)
+    {
+        int subArrays=1;
+        int sum=0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(sum+a[i]<=limit)
+            {
+                sum=sum+a[i];
+            }
+            else
+            {
+                subArrays++;
+                sum=a[i];
+            }
+        }
+        return subArrays;
+    } 
+}
 
+class Solution2
+{
+    public int largestSubarraySumMinimized(int[] a, int k) 
+    {
+        // binarySearch
+        int low=Integer.MIN_VALUE;
+        int high=0;
+        int ans=-1;
+        for(int n : a)
+        {
+            high=high+n;
+            if(n>low)
+            {
+                low=n;
+            }
+        }
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            int count=countSum(a,mid);
-
-            if(count<=k)
+            int noOfSubArrays=calculate(a,mid);
+            if(noOfSubArrays<=k)
             {
+                ans=mid;
                 high=mid-1;
             }
-            else if(count>k)
+            else
             {
                 low=mid+1;
             }
         }
-        return low;
+        return ans; // return low
     }
-    
-    public int countSum(int a[],int limit)
+    public int calculate(int[] a, int limit)
     {
-        int count=1;
-        int total=0;
-        for(int n:a)
+        int subArrays=1;
+        int sum=0;
+        for(int i=0;i<a.length;i++)
         {
-            if(total+n>limit)
+            if(sum+a[i]<=limit)
             {
-                count++;
-                total=n;
+                sum=sum+a[i];
             }
             else
             {
-                total=total+n;
+                subArrays++;
+                sum=a[i];
             }
         }
-        return count;
-    }
+        return subArrays;
+    } 
 }
-
