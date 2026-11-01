@@ -1,14 +1,11 @@
 package BinarySearch.FAQs;
-
 import java.util.Arrays;
-
 
 /*
 
 Given an array nums of size n, which denotes the positions of stalls, and an integer k, which denotes the number of aggressive cows, 
 assign stalls to k cows such that the minimum distance between any two cows is the maximum possible.
 Find the maximum possible minimum distance.
-
 
 Example 1
 Input: n = 6, k = 4, nums = [0, 3, 4, 7, 10, 9]
@@ -28,24 +25,108 @@ Constraints
 2 <= n <= 105
 2 <= k <= n
 0 <= nums[i] <= 109
+All the positions of stalls are unique
 
 HARD    
 */
 
-class Solution 
+class Solution1 
 {
     public int aggressiveCows(int[] nums, int k) 
     {
+        // linearSearch
         Arrays.sort(nums);
-
-        int low=1;
+        int low=0;
         int high=nums[nums.length-1]-nums[0];
+        int ans=-1;
+        for(int i=low;i<=high;i++)
+        {
+            if(canWePlace(nums,i,k)==true)
+            {
+               ans=i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return ans;
+    }
+    public boolean canWePlace(int[] nums,int distance, int k)
+    {
+        int noOfCows=1;
+        int lastCowPosition=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+            if(nums[i]-lastCowPosition>=distance)
+            {
+                noOfCows++;
+                lastCowPosition=nums[i];
+            }
+            if(noOfCows>=k)
+            {
+                return true;
+            } 
+        }
+        return false;
+    } 
+}
 
+class Solution2 
+{
+    public int aggressiveCows(int[] nums, int k) 
+    {
+        // linearSearch
+        Arrays.sort(nums);
+        int low=0;
+        int high=nums[nums.length-1]-nums[0];
+        int ans=-1;
+        for(int i=low;i<=high;i++)
+        {
+            int noOfCows=calculate(nums,i);
+            if(noOfCows>=k)
+            {
+               ans=i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return ans;
+    }
+    public int calculate(int[] nums,int distance)
+    {
+        int cows=1;
+        int lastCowPosition=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+            if(nums[i]-lastCowPosition>=distance)
+            {
+                cows++;
+                lastCowPosition=nums[i];
+            }
+        }
+        return cows;
+    } 
+}
+
+class Solution3 
+{
+    public int aggressiveCows(int[] nums, int k) 
+    {
+        // binarySearch
+        Arrays.sort(nums);
+        int low=0;
+        int high=nums[nums.length-1]-nums[0];
+        int ans=-1;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(canWePlace(nums,mid,k)==true)
+            int noOfcows=calculate(nums,mid);
+            if(noOfcows>=k)
             {
+                ans=mid;
                 low=mid+1;
             }
             else
@@ -53,26 +134,64 @@ class Solution
                 high=mid-1;
             }
         }
-        return high;
+        return ans;
     }
-
-    public boolean canWePlace(int stalls[],int distance,int k)
+    public int calculate(int[] nums, int distance)
     {
         int cows=1;
-        int last=stalls[0];
-        for(int n : stalls)
+        int lastCowPosition=nums[0];
+        for(int i=1;i<nums.length;i++)
         {
-            if(n-last>=distance)
+            if(nums[i]-lastCowPosition>=distance)
             {
                 cows++;
-                last=n;
+                lastCowPosition=nums[i];
             }
+        }
+        return cows;
+    } 
+}
 
-            if(cows>=k)
+class Solution4 
+{
+    public int aggressiveCows(int[] nums, int k) 
+    {
+        // binarySearch
+        Arrays.sort(nums);
+        int low=0;
+        int high=nums[nums.length-1]-nums[0];
+        int ans=-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(canWePlace(nums,mid,k)==true)
+            {
+                ans=mid;
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return ans; // return high
+    }
+    public boolean canWePlace(int[] nums, int distance,int cows)
+    {
+        int noOfCows=1;
+        int lastCowPosition=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+            if(nums[i]-lastCowPosition>=distance)
+            {
+                noOfCows++;
+                lastCowPosition=nums[i];
+            }
+            if(noOfCows>=cows)
             {
                 return true;
             }
         }
         return false;
-    }
+    } 
 }

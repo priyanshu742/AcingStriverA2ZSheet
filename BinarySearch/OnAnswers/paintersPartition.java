@@ -35,56 +35,104 @@ Constraints
 1 <= N <= 105
 1 <= C[i] <= 106
 
-HARD    
+MEDIUM   
 */
 
-class Solution 
+class Solution1 
 {
     public int paint(int A, int B, int[] C) 
     {
-        int low=Integer.MIN_VALUE;
-        int high=0;
-        for(int n:C)
+        // binarySearch
+        long low=Integer.MIN_VALUE;
+        long high=0;
+        long ans=-1;
+        for(int n : C)
         {
+            high=high+n;
             if(n>low)
             {
                 low=n;
             }
-            high=high+n;
         }
         while(low<=high)
         {
-            int mid=low+(high-low)/2;
-            int painters=countPainter(C,mid);
-
-            if(painters<=A)
+            long mid=low+(high-low)/2;
+            int noOfpainters=calculate(C,mid);
+            if(noOfpainters<=A)
             {
+                ans=mid;
                 high=mid-1;
             }
-            else if(painters>A)
+            else
             {
                 low=mid+1;
             }
         }
-        return(int) (((long)low*B)%10000003);
+        return(int) (((long)ans*B)%10000003); 
     }
-
-    public int countPainter(int nums[],int capacity)
+    public int calculate(int[] C,long length)
     {
-        int painter=1;
-        int total=0;
-        for(int n:nums)
+        int painters=1;
+        long total=0;
+        for(int i=0;i<C.length;i++)
         {
-            if(total+n>capacity)
+            if(total+C[i]<=length)
             {
-                painter++;
-                total=n;
+                total=total+C[i];
             }
             else
             {
-                total=total+n;
+                painters++;
+                total=C[i];
             }
         }
-        return painter;
+        return painters;
+    } 
+}
+
+class Solution2 
+{
+    public int paint(int A, int B, int[] C) 
+    {
+        // linearSearch
+        long low=Integer.MIN_VALUE;
+        long high=0;
+        long ans=-1;
+        for(int n : C)
+        {
+            high=high+n;
+            if(n>low)
+            {
+                low=n;
+            }
+        }
+        for(long i=low;i<=high;i++)
+        {
+            int noOfpainters=calculate(C,i);
+            if(noOfpainters<=A)
+            {
+                ans=i;
+                break;
+            }
+        }
+        return(int) (((long)ans*B)%10000003);
     }
+    public int calculate(int[] C,long length)
+    {
+        int painters=1;
+        long total=0;
+        for(int i=0;i<C.length;i++)
+        {
+            if(total+C[i]<=length)
+            {
+                total=total+C[i];
+            }
+            else
+            {
+                painters++;
+                total=C[i];
+            }
+        }
+        return painters;
+    } 
 }

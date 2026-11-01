@@ -4,10 +4,11 @@ package BinarySearch.FAQs;
 
 Given an array arr of integers. A peak element is defined as an element greater than both of its neighbors.
 Formally, if arr[i] is the peak element, arr[i - 1] < arr[i] and arr[i + 1] < arr[i].
-
 Find the index(0-based) of a peak element in the array.
 If there are multiple peak numbers, return the index of any peak number.
-Note: As there can be many peak values, "true" is given as output if the returned index is a peak number, otherwise the returned value of index.
+Note: 
+As there can be many peak values, "true" is given as output if the returned index is a peak number, otherwise the returned value of index.
+The first and last elements of the array can also be considered peak elements. For boundary elements, assume the missing neighbor is smaller than any possible element in the array.
 
 Example 1
 Input : arr = [1, 2, 3, 4, 5, 6, 7, 8, 5, 1]
@@ -27,16 +28,16 @@ arr[i] != arr[i + 1] for all valid i.
 For arr[0], its left element can be considered as -∞
 For arr[n-1], its right element can be considered as -∞
 
-MEDIUM
+EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int findPeakElement(int[] arr) 
     {
-        int low=1;
-        int high=arr.length-2;
-        if(arr.length==1)
+        // binarySearch
+        int n=arr.length;
+        if(n==1)
         {
             return 0;
         }
@@ -44,11 +45,12 @@ class Solution
         {
             return 0;
         }
-        if(arr[arr.length-2]<arr[arr.length-1])
+        if(arr[n-1]>arr[n-2])
         {
-            return arr.length-1;
+            return n-1;
         }
-
+        int low=1;
+        int high=n-2;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
@@ -60,15 +62,128 @@ class Solution
             {
                 high=mid-1;
             }
-            else if(arr[mid]<arr[mid+1])
-            {
-                low=mid+1;
-            } 
             else
             {
                 low=mid+1;
             }
         }
-        return-1;
+        return -1;
+        // This will work even if the array has multiple peaks
+    }
+}
+
+class Solution2 
+{
+    public int findPeakElement(int[] arr) 
+    {
+        // linearSearch
+        int n=arr.length;
+        if(n==1)
+        {
+            return 0;
+        }
+        if(arr[0]>arr[1])
+        {
+            return 0;
+        }
+        if(arr[n-1]>arr[n-2])
+        {
+            return n-1;
+        }
+        for(int i=1;i<arr.length-1;i++)
+        {
+            if(arr[i-1]<arr[i] && arr[i+1]<arr[i])
+            {
+                return i;
+            }
+        }
+        return -1;
+        // This will work even if the array has multiple peaks
+    }
+}
+
+class Solution3 
+{
+    public int findPeakElement(int[] arr) 
+    {
+        // binarySearch
+        int n=arr.length;
+        if(n==1)
+        {
+            return 0;
+        }
+        if(arr[0]>arr[1])
+        {
+            return 0;
+        }
+        if(arr[n-1]>arr[n-2])
+        {
+            return n-1;
+        }
+        int low=1;
+        int high=n-2;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(arr[mid-1]<arr[mid] && arr[mid+1]<arr[mid])
+            {
+                return mid;
+            }
+            else if(arr[mid]>arr[mid-1])
+            {
+                low=mid+1;
+            }
+            else if(arr[mid]>arr[mid+1])
+            {
+                high=mid-1;
+            }
+            else
+            {
+                high=mid-1; // low=mid+1
+            }
+        }
+        return -1;
+        // This will work even if the array has multiple peaks
+    }
+}
+
+class Solution4 
+{
+    public int findPeakElement(int[] arr) 
+    {
+        // binarySearch
+        int n=arr.length;
+        if(n==1)
+        {
+            return 0;
+        }
+        if(arr[0]>arr[1])
+        {
+            return 0;
+        }
+        if(arr[n-1]>arr[n-2])
+        {
+            return n-1;
+        }
+        int low=1;
+        int high=n-2;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(arr[mid-1]<arr[mid] && arr[mid+1]<arr[mid])
+            {
+                return mid;
+            }
+            else if(arr[mid]>arr[mid-1])
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return -1;
+        // This will work even if the array has multiple peaks
     }
 }
