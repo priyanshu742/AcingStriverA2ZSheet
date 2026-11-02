@@ -1,7 +1,3 @@
-package BinarySearch.BSOn2DArrays;
-
-
-
 /*
 
 Given a non-empty grid mat consisting of only 0s and 1s, where all the rows are sorted in ascending order, 
@@ -29,39 +25,134 @@ mat[i][j] is either 0 or 1.
 EASY
 */
 
-class Solution 
+class Solution1
+{
+    public int rowWithMax1s(int[][] mat) 
+    {
+        // brute
+        int ans=-1;
+        int largest=0;
+        int row=mat.length;
+        int column=mat[0].length;
+        for(int i=0;i<row;i++)
+        {
+            int count=0;
+            for(int j=0;j<column;j++)
+            {
+                if(mat[i][j]==1)
+                {
+                    count++;
+                }
+            }
+            if(count>largest)
+            {
+                largest=count;
+                ans=i;
+            }
+        }
+        return ans;
+    }
+}
+
+class Solution2
+{
+    public int rowWithMax1s(int[][] mat) 
+    {
+        // brute
+        int ans=-1;
+        int largest=0;
+        int row=mat.length;
+        int column=mat[0].length;
+        for(int i=0;i<row;i++)
+        {
+            int count=0;
+            for(int j=0;j<column;j++)
+            {
+                count=count+mat[i][j];
+                
+            }
+            if(count>largest)
+            {
+                largest=count;
+                ans=i;
+            }
+        }
+        return ans;
+    }
+}
+
+class Solution3
 {
     public int rowWithMax1s(int[][] mat) 
     {
         // optimal
-        int max=0;
-        int maxInd=-1;
+        int ans=-1;
+        int largest=0;
         int row=mat.length;
         int column=mat[0].length;
-
         for(int i=0;i<row;i++)
         {
-            int Ones=column-lowerBound(mat[i]);
-            if(Ones>max)
+            int count=0;
+            int low=0;
+            int high=column-1;
+            while(low<=high)
             {
-                max=Ones;
-                maxInd=i;
+                int mid=low+(high-low)/2;
+                if(mat[i][mid]==1)
+                {
+                    count=column-mid;
+                    high=mid-1;
+                }
+                else
+                {
+                    low=mid+1;
+                }
+            }
+            if(count>largest)
+            {
+                largest=count;
+                ans=i;
             }
         }
-        return maxInd;
+        return ans;
     }
+}
 
-    public int lowerBound(int nums[])
+class Solution4
+{
+    public int rowWithMax1s(int[][] mat) 
+    {
+        // optimal
+        int ans=-1;
+        int largest=0;
+        int row=mat.length;
+        int column=mat[0].length;
+        for(int i=0;i<row;i++)
+        {
+            int count=column-firstOccurence(mat[i],column,1);
+            if(count>largest)
+            {
+                largest=count;
+                ans=i;
+            }
+        }
+        return ans;
+    }
+    public int firstOccurence(int[] column,int length,int target)
     {
         int low=0;
-        int high=nums.length-1;
-        int ans=nums.length;
+        int high=length-1;
+        int ans=column.length;
         while(low<=high)
-        {                
-            int mid=low+(high-low)/2;              
-            if(nums[mid]>=1)       
+        {
+            int mid=low+(high-low)/2;
+            if(column[mid]==target)
             {
                 ans=mid;
+                high=mid-1;
+            }
+            else if(column[mid]>target)
+            {
                 high=mid-1;
             }
             else
@@ -70,5 +161,5 @@ class Solution
             }
         }
         return ans;
-    }
+    } 
 }

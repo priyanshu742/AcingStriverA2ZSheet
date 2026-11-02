@@ -26,7 +26,103 @@ Constraints
 HARD
 */
 
-class Solution 
+class Solution1 
+{
+    public int kthElement(int[] a, int[] b, int k) 
+    {
+        // brute
+        int n1=a.length;
+        int n2=b.length;
+        int temp[]=new int[n1+n2];
+        int l=0;
+        int r=0;
+        int index=0;
+        while(l<n1 && r<n2)
+        {
+            if(a[l]<=b[r])
+            {
+                temp[index]=a[l];
+                index++;
+                l++;
+            }
+            else
+            {
+                temp[index]=b[r];
+                index++;
+                r++;
+            }
+        }
+        while(l<n1)
+        {
+            temp[index]=a[l];
+            index++;
+            l++;
+        }
+        while(r<n2)
+        {
+            temp[index]=b[r];
+            index++;
+            r++;
+        }
+        return temp[k-1];
+    }
+}
+
+class Solution2 
+{
+    public int kthElement(int[] a, int[] b, int k) 
+    {
+        // better
+        int n1=a.length;
+        int n2=b.length;
+        int ele=-1;
+        int l=0;
+        int r=0;
+        int count=0;
+        while(l<n1 && r<n2)
+        {
+            if(a[l]<=b[r])
+            {
+                if(count==k-1)
+                {
+                    return a[l];
+                }
+                count++;
+                l++;
+            }
+            else
+            {
+                if(count==k-1)
+                {
+                    return b[r];
+                }
+                count++;
+                r++;
+            }
+        }
+        while(l<n1)
+        {
+            if(count==k-1)
+            {
+                return a[l];
+            }
+            count++;
+            l++;
+        }
+        while(r<n2)
+        {
+            if(count==k-1)
+            {
+                return b[r];
+            }
+            count++;
+            r++;
+        }
+       return 0;
+    }
+}
+
+class Solution3 
 {
     public int kthElement(int[] a, int[] b, int k) 
     {
@@ -34,12 +130,13 @@ class Solution
         int n1=a.length;
         int n2=b.length;
         if(n1>n2)
-        {
-            return kthElement(b,a,k);
+        { 
+            kthElement(b,a,k);
         }
-        int low=Math.max(0,k-n2);
-        int high=Math.max(n1,k);
+        int low=Math.max(0,k-n2); // array2 will get exhausted if k>n2 (to handle this)
+        int high=Math.min(k,n1); // if k<n1 then only k elements are needed in left half,not more than that
         int left=k;
+        int n=n1+n2;
         while(low<=high)
         {
             int mid1=low+(high-low)/2;
@@ -62,7 +159,6 @@ class Solution
             {
                 l2=b[mid2-1];
             }
-
             if(l1<=r2 && l2<=r1)
             {
                 return Math.max(l1,l2);
@@ -71,11 +167,12 @@ class Solution
             {
                 high=mid1-1;
             }
-            else
+            else // if(l2>r1)
             {
                 low=mid1+1;
             }
         }
-        return 0;
+        return 1;
     }
 }
+
