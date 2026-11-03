@@ -1,5 +1,7 @@
 package BinarySearch.FAQs;
 
+import java.util.PriorityQueue;
+
 /*
 
 Given a sorted array arr of size n, containing integer positions of n gas stations on the X-axis, and an integer k, place k new gas stations on the X-axis.
@@ -39,45 +41,111 @@ arr is sorted in a strictly increasing order
 HARDEST
 */
 
+class Solution1 
+{
+    public double minimiseMaxDistance(int[] arr, int k) 
+    {
+        // brute
+        int howMany[]=new int[arr.length-1];
+        for(int i=0;i<k;i++)
+        {
+            double maxSection=-1;
+            int maxInd=-1;
+            for(int j=0;j<arr.length-1;j++)
+            {
+                double difference=arr[j+1]-arr[j];
+                double sectionLength=difference/(howMany[j]+1);
+                if(sectionLength>maxSection)
+                {
+                    maxSection=sectionLength;
+                    maxInd=j;
+                }
+            }  
+            howMany[maxInd]++;
+        }
+        double maxAns=-1;
+        for(int i=0;i<arr.length-1;i++)
+        {
+            double difference=arr[i+1]-arr[i];
+            double sectionLength=difference/(howMany[i]+1);
+            if(sectionLength>maxAns)
+            {
+                maxAns=sectionLength;
+            }
+        }
+        return maxAns;  
+    }
+}
+
+
+class Solution2
+{
+    public double minimiseMaxDistance(int[] arr, int k) 
+    {
+        // better
+        int howMany[]=new int[arr.length-1];
+        PriorityQueue<double[]> pq=new PriorityQueue<>((a,b) -> Double.compare(b[0],a[0]));
+        for(int i=0;i<arr.length-1;i++)
+        {
+            pq.add(new double[]{(double)arr[i+1]-arr[i],(double)i});
+        }
+        for(int i=0;i<k;i++) // putting gasStations
+        {
+            double[] tp=pq.poll();
+            int sectionIndex=(int)tp[1];
+            howMany[sectionIndex]++;
+            double difference=arr[sectionIndex+1]-arr[sectionIndex];
+            double newSectionLength=difference/(howMany[sectionIndex]+1);
+            pq.add(new double[]{(double)newSectionLength,(double)sectionIndex});
+        }
+        return pq.peek()[0];  
+    }
+}
+
 class Solution 
 {
     public double minimiseMaxDistance(int[] arr, int k) 
     {
+        // optimal
         double low=0;
-        double high=0;
-        for(int i=0;i<arr.length-1;i++)
+        double high=Integer.MIN_VALUE;
+        for(int i=1;i<arr.length;i++)
         {
-            high=Math.max(high,(double)arr[i+1]-arr[i]);
+            int difference=arr[i]-arr[i-1];
+            if(difference>high)
+            {
+                high=difference;
+            }
         }
         while(high-low>1e-6)
         {
-            double mid=low+(high-low)/2.0;
-            int Stations=countStations(arr,mid);
-            if(Stations>k)
+            double mid=low+(high-low)/2;
+            int count=numberOfGasStations(arr,mid);
+            if(count>k)
             {
                 low=mid;
             }
-            else
+            else 
             {
                 high=mid;
             }
         }
         return high;
+        
     }
-
-    public int countStations(int []arr,double dist)
+    public int numberOfGasStations(int[] arr, double distance) 
     {
         int count=0;
-        for(int i=0;i<arr.length-1;i++)
+        for(int i=1;i<arr.length;i++)
         {
-            int numberInBetween=(int)((arr[i+1]-arr[i])/dist);
-            if((arr[i+1]-arr[i])==numberInBetween*dist)
+            double gap=arr[i]-arr[i-1];
+            int numberInBetween=(int)((arr[i]-arr[i-1])/distance);
+            if(gap==distance*numberInBetween)
             {
                 numberInBetween--;
             }
-            count+=numberInBetween;
+            count=count+numberInBetween;
         }
         return count;
     }
 }
-

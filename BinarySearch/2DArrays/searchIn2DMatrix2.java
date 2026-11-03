@@ -1,8 +1,6 @@
-package BinarySearch.BSOn2DArrays;
+
 
 /*
-
-
 
 Given a 2D array matrix where each row is sorted in ascending order from left to right and each column is sorted in ascending order from top to bottom,
 write an efficient algorithm to search for a specific integer target in the matrix.
@@ -30,10 +28,76 @@ All the integers in each column are sorted in ascending order.
 EASY
 */
 
-class Solution 
+class Solution1
 {
     public boolean searchMatrix(int[][] matrix, int target) 
     {
+        // brute
+        // linearSearch
+        int row=matrix.length;
+        int column=matrix[0].length;
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<column;j++)
+            {
+                if(matrix[i][j]==target)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+class Solution2 
+{
+    public boolean searchMatrix(int[][] matrix, int target) 
+    {
+        // better
+        int row=matrix.length;
+        int column=matrix[0].length;
+        for(int i=0;i<row;i++)
+        {
+            if(matrix[i][0]<=target && matrix[i][column-1]>=target)
+            {
+                if(binarySearch(matrix[i],target)==1)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public int binarySearch(int[] matrix, int target) 
+    {
+        int low=0;
+        int high=matrix.length-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(matrix[mid]==target)
+            {
+                return 1;
+            }
+            else if(matrix[mid]>target)
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return -1;
+    }
+}
+
+class Solution3
+{
+    public boolean searchMatrix(int[][] matrix, int target) 
+    {
+        // optimal
         int n=matrix.length;
         int m=matrix[0].length;
         int row=0;
@@ -44,14 +108,14 @@ class Solution
             {
                 return true;
             }
-            else if(matrix[row][column]>target)
+            else if(matrix[row][column]<target)
             {
-                column--;
+                row++;
             }
             else
             {
-                row++;
-            } 
+                column--;
+            }
         }
         return false;
     }
