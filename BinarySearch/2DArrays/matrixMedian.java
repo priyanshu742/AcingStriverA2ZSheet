@@ -1,4 +1,6 @@
-package BinarySearch.BSOn2DArrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /*
 
@@ -26,7 +28,28 @@ N*M is odd
 MEDIUM
 */
 
-class Solution 
+class Solution1 
+{
+    public int findMedian(int[][] matrix) 
+    {
+        // brute
+        int row=matrix.length;
+        int column=matrix[0].length;
+        int n=row*column;
+        List<Integer> arr=new ArrayList<>();
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<column;j++)
+            {
+                arr.add(matrix[i][j]);
+            }   
+        }
+       Collections.sort(arr);
+       return arr.get(n/2);
+    }
+}
+
+class Solution2 
 {
     public int findMedian(int[][] matrix) 
     {
@@ -35,53 +58,62 @@ class Solution
         int column=matrix[0].length;
         int low=Integer.MAX_VALUE;
         int high=Integer.MIN_VALUE;
-        int required=(row*column)/2;
-
+        int req=(row*column)/2;
+        int ans=-1;
         for(int i=0;i<row;i++)
         {
-            low=Math.min(low,matrix[i][0]);
-            high=Math.max(high,matrix[i][column-1]);
+            if(matrix[i][0]<low)
+            {
+                low=matrix[i][0];
+            }
+            if(matrix[i][column-1]>high)
+            {
+                high=matrix[i][column-1];
+            }
         }
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            int smallerElements=countSmallEquals(matrix,mid,row,column);
-            if(smallerElements<=required)
+            int smaller=calculate(matrix,mid);
+            if(smaller<=req)
             {
                 low=mid+1;
             }
             else
             {
+                ans=mid;
                 high=mid-1;
             }
         }
-        return low;
+        return ans; // return low;
     }
-    public int countSmallEquals(int [][]mat,int element,int row,int column)
+    public int calculate(int[][] matrix,int number)
     {
         int count=0;
-        for(int i=0;i<row;i++)
+        for(int i=0;i<matrix.length;i++)
         {
-            count=count+upperBound(mat[i],element);
+            count=count+upperBound(matrix[i],number);
         }
         return count;
-    }
-    public int upperBound(int []mat,int element)
+    } 
+    public int upperBound(int[] arr,int number)
     {
         int low=0;
-        int high=mat.length-1;
+        int high=arr.length-1;
+        int ans=arr.length;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(mat[mid]>element)
+            if(arr[mid]>number)
             {
+                ans=mid;
                 high=mid-1;
             }
             else
-            {
+            { 
                 low=mid+1;
             }
         }
-        return low;
+        return ans;
     }
 }

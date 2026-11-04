@@ -32,6 +32,7 @@ class Solution1
 {
     public int maxDepth(String s) 
     {
+        // optimal
         int count=0;
         int depth=0;
         int size=s.length();
@@ -58,6 +59,7 @@ class Solution2
 {
     public int maxDepth(String s) 
     {
+        // better
         int count=0;
         int depth=0;
         for(char c : s.toCharArray())
