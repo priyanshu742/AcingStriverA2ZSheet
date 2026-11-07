@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import Hashing.FAQs.Solution;
 
 
 class Solution 
@@ -35,7 +34,7 @@ public class demo
         Solution s1= new Solution();
         int nums[] ={ 6, 5, 7, 1, 8, 6, 4, 3, 2};
 
-        int result[]=s1.findMissingRepeatingNumbers(nums);
+        int result[]=s1.(nums);
 
         for(int n: result)
         System.out.println(n);

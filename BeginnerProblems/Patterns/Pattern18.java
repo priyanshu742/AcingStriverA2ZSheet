@@ -21,7 +21,7 @@ Constraints
 MEDIUM
 */
 
-class Solution 
+class Solution1 
 {
     public void pattern18(int n) 
     {

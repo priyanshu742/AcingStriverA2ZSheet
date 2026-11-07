@@ -29,7 +29,7 @@ Constraints
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public int maxLen(int[] arr) 
     {
@@ -56,7 +56,7 @@ class Solution
     }
 }
 
-class Solution 
+class Solution2 
 {
     public int maxLen(int[] arr) 
     {

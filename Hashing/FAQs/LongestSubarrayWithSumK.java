@@ -108,7 +108,7 @@ class Solution3
             }
             if(sum==k)
             {
-                int count=(right-left+1)
+                int count=(right-left+1);
                 if(count>longest)
                 {
                     longest=count;

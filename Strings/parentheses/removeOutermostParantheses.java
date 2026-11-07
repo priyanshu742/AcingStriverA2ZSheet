@@ -35,7 +35,7 @@ s is a valid parentheses string
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public String removeOuterParentheses(String s) 
     {
@@ -65,7 +65,7 @@ class Solution
     }
 }
 
-class Solution 
+class Solution2 
 {
     public String removeOuterParentheses(String s) 
     {
