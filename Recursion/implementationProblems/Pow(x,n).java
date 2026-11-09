@@ -26,10 +26,109 @@ n is an integer.
 EASY
 */
 
-class Solution 
+class Solution1 
 {
     public double myPow(double x, int n) 
     {
+        // brute
+        long M=n;
+        int negative=0;
+        if(M<0)
+        {
+            M=-M;
+            negative=1;
+        }
+        double ans=1;
+        for(int i=1;i<=M;i++)
+        {
+            ans=ans*x;
+        }
+        if(negative==1)
+        {
+            ans=1/ans;
+        }
+        return ans;
+    }
+}
+
+class Solution2 
+{
+    public double myPow(double x, int n) 
+    {
+        // optimal without recursion
+        long N=n;
+        int negative=0;
+        if(N<0)
+        {
+            negative=1;
+            N=-N;
+        }
+        double ans=1;
+        while(N>0)
+        {
+            // N is odd
+            if(N%2==1)
+            {
+                ans=ans*x;
+                N=N-1;
+            }
+            // N is even
+            else if(N%2==0)
+            {
+                N=N/2;
+                x=x*x;
+            }
+        }
+        if(negative==1)
+        {
+            ans=1/ans;
+        }
+        return ans;
+    }
+}
+
+class Solution3
+{
+    public double myPow(double x, int n) 
+    {
+        // optimal with recursion
+        long M=n;
+        int negative=0;
+        if(M<0)
+        {
+            M=-M;
+            negative=1;
+        }
+        long ans=1;
+        double result=pow(x,M,ans);
+        if(negative==1)
+        {
+            result=1/result;
+        }
+        return result;
+    }
+    public double pow(double x, long M,double ans) 
+    {
+        if(M==0)
+        {
+            return ans;
+        }
+        // M is odd
+        if(M%2==1)
+        {
+            ans=ans*x;
+        }
+        // M is even
+        x=x*x;
+        return pow(x,M/2,ans);
+    }
+}
+
+class Solution4
+{
+    public double myPow(double x, int n) 
+    {
+        // optimal with recursion
         if(n<0)
         {
             x=1/x;
